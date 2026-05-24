@@ -1,0 +1,85 @@
+{
+  "name": "Expedition OZ — Live-Aboard Ningaloo Reef",
+  "short_name": "Expedition OZ",
+  "description": "Navigate remote stretches of Ningaloo Reef aboard purpose-built vessels. Whale shark tracking, deep reef diving, live-aboard expeditions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#071a2b",
+  "theme_color": "#071a2b",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-AU",
+  "categories": ["travel", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "label": "Expedition OZ homepage"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Book an Expedition",
+      "short_name": "Book",
+      "url": "/book",
+      "description": "Reserve your spot on the next expedition"
+    },
+    {
+      "name": "Our Expeditions",
+      "short_name": "Expeditions",
+      "url": "/expeditions",
+      "description": "Browse available expeditions"
+    }
+  ]
+}
