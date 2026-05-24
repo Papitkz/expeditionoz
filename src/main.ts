@@ -1,16 +1,13 @@
 import { ViteSSG } from 'vite-ssg'
 import { createVuetify } from 'vuetify'
-import { createHead } from '@unhead/vue'
-// Auto-import via vite-plugin-vuetify — do NOT import all components/directives
+import { createUnhead } from '@unhead/vue'
 import 'vuetify/styles'
-// MDI font is huge; tree-shake by loading only the CSS
 import '@mdi/font/css/materialdesignicons.css'
 import './style.css'
 import App from './App.vue'
 import { routes } from './router'
 
 const vuetify = createVuetify({
-  // Components and directives are auto-imported by vite-plugin-vuetify
   theme: {
     defaultTheme: 'expeditionDark',
     themes: {
@@ -48,11 +45,10 @@ export const createApp = ViteSSG(
   App,
   { routes, base: '/' },
   ({ app, router, isClient }) => {
-    app.use(createHead())
+    app.use(createUnhead())
     app.use(router)
     app.use(vuetify)
 
-    // Handle SPA redirect from 404.html
     if (isClient && typeof window !== 'undefined') {
       const redirect = sessionStorage.getItem('spa-redirect')
       if (redirect) {
