@@ -102,8 +102,8 @@ const navLinks = [
 const reefExpanded = ref(false)
 
 const reefSubItems = [
-  { label: 'Dive Expedition', to: '/expeditions/millenium', tag: '9 Days' },
-  { label: 'Ocean Safari', to: '/expeditions/sylvia', tag: '6 Days' }
+  { label: 'Dive Expedition', to: '/expeditions/dive-expedition', tag: '9 Days' },
+  { label: 'Ocean Safari', to: '/expeditions/ocean-safari', tag: '6 Days' }
 ]
 
 function toggleReefMenu() {
