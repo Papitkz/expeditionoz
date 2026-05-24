@@ -1,19 +1,20 @@
 import { useHead, useSeoMeta } from '@unhead/vue'
 import { useRoute } from 'vue-router'
+import { computed, unref, type MaybeRef } from 'vue'
 
 interface SEOConfig {
-  title?: string
-  description?: string
-  image?: string
-  path?: string
-  type?: 'website' | 'article' | 'product'
-  noindex?: boolean
-  keywords?: string[]
-  author?: string
+  title?: MaybeRef<string | undefined>
+  description?: MaybeRef<string | undefined>
+  image?: MaybeRef<string | undefined>
+  path?: MaybeRef<string | undefined>
+  type?: MaybeRef<'website' | 'article' | 'product' | undefined>
+  noindex?: MaybeRef<boolean | undefined>
+  keywords?: MaybeRef<string[] | undefined>
+  author?: MaybeRef<string | undefined>
   jsonLd?: Record<string, any> | Record<string, any>[]
-  articlePublishedAt?: string
-  articleModifiedAt?: string
-  articleTags?: string[]
+  articlePublishedAt?: MaybeRef<string | undefined>
+  articleModifiedAt?: MaybeRef<string | undefined>
+  articleTags?: MaybeRef<string[] | undefined>
 }
 
 const SITE_NAME = 'Expedition OZ'
@@ -163,16 +164,23 @@ export function buildProductSchema(config: {
 export function useSEO(config: SEOConfig = {}) {
   const route = useRoute()
 
-  const path = config.path || route.path
-  const title = config.title ? `${config.title} | ${SITE_NAME}` : `${SITE_NAME} — Live-Aboard Expeditions, Ningaloo Reef`
-  const description = config.description || DEFAULT_DESCRIPTIONS[path] || DEFAULT_DESCRIPTIONS['/']
-  const canonical = `${SITE_URL}${path}`
-  const ogImage = config.image || DEFAULT_IMAGE
-  const ogType = config.type || 'website'
-  const robots = config.noindex ? 'noindex, nofollow' : 'index, follow'
-  const keywords = config.keywords?.join(', ') || 'Ningaloo Reef, live-aboard expeditions, Exmouth Western Australia, whale sharks, reef diving, Ningaloo Marine Park, small group tours'
+  // Use computed + unref to handle both plain values and refs/computed
+  const path = computed(() => unref(config.path) || route.path)
+  const title = computed(() => {
+    const t = unref(config.title)
+    if (!t) return `${SITE_NAME} — Live-Aboard Expeditions, Ningaloo Reef`
+    // Prevent double appending site name
+    if (t.includes(SITE_NAME)) return t
+    return `${t} | ${SITE_NAME}`
+  })
+  const description = computed(() => unref(config.description) || DEFAULT_DESCRIPTIONS[unref(path)] || DEFAULT_DESCRIPTIONS['/'])
+  const canonical = computed(() => `${SITE_URL}${unref(path)}`)
+  const ogImage = computed(() => unref(config.image) || DEFAULT_IMAGE)
+  const ogType = computed(() => unref(config.type) || 'website')
+  const robots = computed(() => unref(config.noindex) ? 'noindex, nofollow' : 'index, follow')
+  const keywords = computed(() => unref(config.keywords)?.join(', ') || 'Ningaloo Reef, live-aboard expeditions, Exmouth Western Australia, whale sharks, reef diving, Ningaloo Marine Park, small group tours')
+  const author = computed(() => unref(config.author) || 'Expedition OZ')
 
-  // Use useHead for googlebot meta to avoid zhead type restrictions
   useHead({
     meta: [
       { name: 'robots', content: robots },
@@ -182,31 +190,30 @@ export function useSEO(config: SEOConfig = {}) {
   })
 
   useSeoMeta({
-    title: () => title,
-    titleTemplate: (t) => t === SITE_NAME ? `${SITE_NAME} — Live-Aboard Expeditions, Ningaloo Reef` : t as string,
-    description: () => description,
-    ogTitle: () => title,
-    ogDescription: () => description,
-    ogImage: () => ogImage,
+    title: () => title.value,
+    description: () => description.value,
+    ogTitle: () => title.value,
+    ogDescription: () => description.value,
+    ogImage: () => ogImage.value,
     ogImageWidth: 1200,
     ogImageHeight: 630,
     ogImageType: 'image/jpeg',
-    ogUrl: () => canonical,
-    ogType: ogType as 'website' | 'article',
+    ogUrl: () => canonical.value,
+    ogType: () => ogType.value as 'website' | 'article',
     ogSiteName: SITE_NAME,
     ogLocale: 'en_AU',
     twitterCard: 'summary_large_image',
-    twitterTitle: () => title,
-    twitterDescription: () => description,
-    twitterImage: () => ogImage,
+    twitterTitle: () => title.value,
+    twitterDescription: () => description.value,
+    twitterImage: () => ogImage.value,
     twitterSite: '@ExpeditionOz',
     twitterCreator: '@ExpeditionOz',
-    author: () => config.author || 'Expedition OZ',
-    keywords: () => keywords,
-    articlePublishedTime: config.articlePublishedAt,
-    articleModifiedTime: config.articleModifiedAt,
-    articleAuthor: config.author ? [config.author] : undefined,
-    articleTag: config.articleTags,
+    author: () => author.value,
+    keywords: () => keywords.value,
+    articlePublishedTime: () => unref(config.articlePublishedAt),
+    articleModifiedTime: () => unref(config.articleModifiedAt),
+    articleAuthor: () => unref(config.author) ? [unref(config.author)] : undefined,
+    articleTag: () => unref(config.articleTags),
     articleSection: 'Travel',
   })
 
@@ -218,11 +225,11 @@ export function useSEO(config: SEOConfig = {}) {
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
       { rel: 'dns-prefetch', href: 'https://cdn.freebiesupply.com' },
       { rel: 'alternate', hreflang: 'en-au', href: canonical },
-      { rel: 'alternate', hreflang: 'x-default', href: `${SITE_URL}${path}` },
+      { rel: 'alternate', hreflang: 'x-default', href: () => `${SITE_URL}${unref(path)}` },
       { rel: 'sitemap', type: 'application/xml', href: `${SITE_URL}/sitemap.xml`, title: 'Sitemap' },
     ],
     meta: [
-      { name: 'author', content: config.author || 'Expedition OZ' },
+      { name: 'author', content: author },
       { name: 'theme-color', content: '#071a2b', media: '(prefers-color-scheme: dark)' },
       { name: 'theme-color', content: '#f8f5ef', media: '(prefers-color-scheme: light)' },
       { name: 'msapplication-TileColor', content: '#071a2b' },
@@ -242,17 +249,16 @@ export function useSEO(config: SEOConfig = {}) {
         schemas.push(...ld)
       }
 
-      // Add article schema if this is an article type
-      if (config.type === 'article' && config.articlePublishedAt) {
+      if (unref(config.type) === 'article' && unref(config.articlePublishedAt)) {
         schemas.push(buildArticleSchema({
-          title: config.title || 'Blog Post',
-          description: description,
-          image: ogImage,
-          url: canonical,
-          publishedAt: config.articlePublishedAt,
-          modifiedAt: config.articleModifiedAt,
-          author: config.author,
-          tags: config.articleTags,
+          title: unref(config.title) || 'Blog Post',
+          description: unref(description),
+          image: ogImage.value,
+          url: canonical.value,
+          publishedAt: unref(config.articlePublishedAt),
+          modifiedAt: unref(config.articleModifiedAt),
+          author: unref(config.author),
+          tags: unref(config.articleTags),
         }))
       }
 

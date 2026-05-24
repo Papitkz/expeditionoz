@@ -18,14 +18,12 @@ const post = ref<any>(null)
 const loading = ref(true)
 const notFound = ref(false)
 
-useSEO(
-  computed(() => ({
-    title: post.value ? `${post.value.title} — Expedition OZ` : 'Blog — Expedition OZ',
-    description: post.value?.excerpt || 'Stories from Ningaloo Reef.',
-    path: `/blog/${route.params.slug}`,
-    type: 'article',
-  }))
-)
+useSEO({
+  title: computed(() => post.value ? `${post.value.title} — Expedition OZ` : 'Blog — Expedition OZ'),
+  description: computed(() => post.value?.excerpt || 'Stories from Ningaloo Reef.'),
+  path: computed(() => `/blog/${route.params.slug}`),
+  type: 'article',
+})
 
 onMounted(async () => {
   const slug = route.params.slug as string
@@ -50,7 +48,7 @@ const openLightbox = (index: number) => {
 }
 </script>
 
-<template>
+<<template>
   <div>
     <!-- Loading -->
     <div v-if="loading" class="flex items-center justify-center min-h-screen" style="background: var(--color-ocean-950);">
@@ -140,11 +138,11 @@ const openLightbox = (index: number) => {
                 :key="i"
                 class="relative overflow-hidden cursor-pointer"
                 style="height: 180px;"
-                @click="openLightbox(i)"
+                @click="openLightbox(i as number)"
               >
                 <img
                   :src="img.url || img"
-                  :alt="img.caption || `Gallery image ${i + 1}`"
+                  :alt="img.caption || `Gallery image ${(i as number) + 1}`"
                   class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
               </div>

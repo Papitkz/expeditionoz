@@ -4,17 +4,17 @@ defineProps<{
   title: string
   titleItalic?: string
   subtitle?: string
-  image: string
-  imageAlt: string
+  image?: string
+  imageAlt?: string
   height?: string
 }>()
 </script>
 
-<template>
+<<template>
   <section class="page-hero relative flex items-end overflow-hidden" :style="`min-height: ${height || '60vh'}`">
     <div class="hero-overlay absolute inset-0 z-10"></div>
     <slot>
-      <img :src="image" :alt="imageAlt" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+      <img v-if="image" :src="image" :alt="imageAlt || ''" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
     </slot>
     <div class="relative z-20 w-full container mx-auto px-6 lg:px-12 pb-16 lg:pb-20">
       <p v-if="tag" class="overline-text mb-4">{{ tag }}</p>
