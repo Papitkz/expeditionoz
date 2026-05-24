@@ -1,8 +1,6 @@
 import { ViteSSG } from 'vite-ssg'
 import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import { createHead } from '@unhead/vue'  
+import { createHead } from '@unhead/vue'
 import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
 import './style.css'
@@ -10,8 +8,6 @@ import App from './App.vue'
 import { routes } from './router'
 
 const vuetify = createVuetify({
-  components,
-  directives,
   theme: {
     defaultTheme: 'expeditionDark',
     themes: {
@@ -26,7 +22,7 @@ const vuetify = createVuetify({
           info: '#0d6e7a',
           success: '#4caf50',
           warning: '#c9a84c',
-        }
+        },
       },
       expeditionLight: {
         dark: false,
@@ -39,21 +35,21 @@ const vuetify = createVuetify({
           info: '#0d6e7a',
           success: '#4caf50',
           warning: '#c9a84c',
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 })
 
 export const createApp = ViteSSG(
   App,
   { routes, base: '/' },
-  ({ app, router, isClient, initialState }) => {
-    app.use(createHead())
+  ({ app, router, isClient }) => {
+    const head = createHead()
+    app.use(head)
     app.use(router)
     app.use(vuetify)
 
-    // Handle SPA redirect from 404.html
     if (isClient && typeof window !== 'undefined') {
       const redirect = sessionStorage.getItem('spa-redirect')
       if (redirect) {
@@ -61,5 +57,5 @@ export const createApp = ViteSSG(
         router.replace(redirect)
       }
     }
-  }
+  },
 )
