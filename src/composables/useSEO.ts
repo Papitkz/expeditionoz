@@ -212,7 +212,11 @@ export function useSEO(config: SEOConfig = {}) {
     keywords: () => keywords.value,
     articlePublishedTime: () => unref(config.articlePublishedAt),
     articleModifiedTime: () => unref(config.articleModifiedAt),
-    articleAuthor: () => unref(config.author) ? [unref(config.author)] : undefined,
+    // FIX 1: Explicitly narrow type to ensure we return string[] | undefined
+    articleAuthor: () => {
+      const a = unref(config.author)
+      return a ? [a] : undefined
+    },
     articleTag: () => unref(config.articleTags),
     articleSection: 'Travel',
   })
@@ -249,17 +253,21 @@ export function useSEO(config: SEOConfig = {}) {
         schemas.push(...ld)
       }
 
-      if (unref(config.type) === 'article' && unref(config.articlePublishedAt)) {
-        schemas.push(buildArticleSchema({
-          title: unref(config.title) || 'Blog Post',
-          description: unref(description),
-          image: ogImage.value,
-          url: canonical.value,
-          publishedAt: unref(config.articlePublishedAt),
-          modifiedAt: unref(config.articleModifiedAt),
-          author: unref(config.author),
-          tags: unref(config.articleTags),
-        }))
+      // FIX 2: Narrow the scope of articlePublishedAt to a constant so TS knows it is a string
+      if (unref(config.type) === 'article') {
+        const pDate = unref(config.articlePublishedAt)
+        if (pDate) {
+          schemas.push(buildArticleSchema({
+            title: unref(config.title) || 'Blog Post',
+            description: unref(description),
+            image: ogImage.value,
+            url: canonical.value,
+            publishedAt: pDate, // Now strictly string
+            modifiedAt: unref(config.articleModifiedAt),
+            author: unref(config.author),
+            tags: unref(config.articleTags),
+          }))
+        }
       }
 
       schemas.push(buildOrganizationSchema())
