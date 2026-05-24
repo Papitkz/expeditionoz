@@ -48,7 +48,7 @@ const openLightbox = (index: number) => {
 }
 </script>
 
-<<template>
+<template>
   <div>
     <!-- Loading -->
     <div v-if="loading" class="flex items-center justify-center min-h-screen" style="background: var(--color-ocean-950);">
@@ -68,6 +68,8 @@ const openLightbox = (index: number) => {
         tag="Expedition Journal"
         :title="post.title"
         :subtitle="post.excerpt"
+        :image="post.coverImageUrl || ''"
+        :image-alt="post.title"
         height="60vh"
       >
         <template #default>
@@ -163,7 +165,7 @@ const openLightbox = (index: number) => {
         </div>
       </section>
 
-      <CtaSection />
+      <!-- <CtaSection /> -->
     </div>
 
     <!-- Lightbox -->
