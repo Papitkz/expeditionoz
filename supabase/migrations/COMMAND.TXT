@@ -1,0 +1,5 @@
+INSERT INTO cms_settings (key, value) VALUES
+  ('rezdy_company_code',               'expeditionoz-aus'),
+  ('rezdy_ocean_safari_product_id',    'PMGSXN'),
+  ('rezdy_dive_expedition_product_id', 'PKN1J1')
+ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;

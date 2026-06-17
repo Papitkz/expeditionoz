@@ -1,0 +1,20 @@
+/* styles/waves.css */
+.wave-divider {
+  filter: drop-shadow(0 -10px 20px rgba(0,0,0,0.1));
+}
+
+/* Smooth section transitions */
+section, .section-hero, .section-light, .section-teal {
+  position: relative;
+  z-index: 1;
+}
+
+/* Optional: Add subtle water shimmer effect */
+@keyframes shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+.wave-front {
+  animation: waveSlide var(--wave-duration) linear infinite, shimmer 3s ease-in-out infinite;
+}

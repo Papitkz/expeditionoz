@@ -1,0 +1,45 @@
+{
+  "name": "expedition-oz",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite-ssg build",
+    "preview": "vite preview"
+  },
+"dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@mdi/font": "^7.4.47",
+    "@supabase/supabase-js": "^2.105.3",
+    "@unhead/addons": "^1.11.0",
+    "@unhead/dom": "^1.11.0",
+    "@unhead/vue": "^1.11.0",
+    "unhead": "^1.11.0",
+    "@vueuse/core": "^14.2.1",
+    "firebase": "^11.6.0",
+    "gsap": "^3.15.0",
+    "hls.js": "^1.6.16",
+    "lenis": "^1.3.23",
+    "three": "^0.184.0",
+    "vite-plugin-vuetify": "^2.1.3",
+    "vite-ssg": "^28.3.0",
+    "vue": "^3.5.32",
+    "vue-router": "^4.6.4",
+    "vuetify": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.2",
+    "@types/three": "^0.184.1",
+    "@vitejs/plugin-vue": "^6.0.5",
+    "@vue/tsconfig": "^0.9.1",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.10",
+    "sass-embedded": "^1.99.0",
+    "tailwindcss": "^3.4.19",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.4",
+    "vite-plugin-sitemap": "^0.8.2",
+    "vue-tsc": "^3.2.6"
+  }
+}

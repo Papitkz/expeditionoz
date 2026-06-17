@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=/">
+  <script>
+    // SPA redirect: preserve the path and redirect to index.html
+    var path = window.location.pathname;
+    var search = window.location.search;
+    var hash = window.location.hash;
+    if (path !== '/') {
+      sessionStorage.setItem('spa-redirect', path + search + hash);
+    }
+    window.location.replace('/' + search + hash);
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
