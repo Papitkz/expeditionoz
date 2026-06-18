@@ -6,7 +6,7 @@ const TEMPLATE_BOOKING_CONFIRMATION = import.meta.env.VITE_EMAILJS_TEMPLATE_BOOK
 const TEMPLATE_ADMIN_NOTIFICATION = import.meta.env.VITE_EMAILJS_TEMPLATE_ADMIN || ''
 const TEMPLATE_STATUS_UPDATE = import.meta.env.VITE_EMAILJS_TEMPLATE_STATUS || ''
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || ''
-const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || 'johnfritzizar35@gmail.com'
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || 'johnfritzizar35@gmail.com' || 'expeditionoz.dev@gmail.com'
 
 // Initialize EmailJS
 if (PUBLIC_KEY) {

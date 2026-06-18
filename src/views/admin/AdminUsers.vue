@@ -4,7 +4,7 @@ import { useAdminAuth, type FirebaseUser } from '@/composables/useAdminAuth'
 
 const { isOwner, isAdmin, user, getAllUsers, updateUserRole, grantAdminAccess } = useAdminAuth()
 
-const OWNER_EMAIL = 'johnfritzizar35@gmail.com'
+const OWNER_EMAILS = ['johnfritzizar35@gmail.com', 'expeditionoz.dev@gmail.com']
 
 const users = ref<FirebaseUser[]>([])
 const loading = ref(true)
@@ -68,7 +68,7 @@ async function grantAccess() {
 }
 
 async function revokeAccess(u: FirebaseUser) {
-  if (u.email === OWNER_EMAIL) {
+  if (OWNER_EMAILS.includes(u.email)) {
     showMessage('Cannot revoke owner access', 'error')
     return
   }
@@ -202,9 +202,9 @@ onMounted(loadUsers)
             v-for="u in filteredUsers"
             :key="u.uid"
             class="user-row"
-            :class="{ 'user-owner': u.email === OWNER_EMAIL }"
+            :class="{ 'user-owner': OWNER_EMAILS.includes(u.email) }"
           >
-            <div class="user-row-avatar" :class="{ 'owner-avatar': u.email === OWNER_EMAIL }">
+            <div class="user-row-avatar" :class="{ 'owner-avatar': OWNER_EMAILS.includes(u.email) }">
               {{ u.email?.charAt(0).toUpperCase() || '?' }}
             </div>
             <div class="user-row-info">
@@ -214,19 +214,19 @@ onMounted(loadUsers)
             </div>
             <div class="user-row-role">
               <span class="role-badge" :class="`role-${u.role}`">
-                {{ u.email === OWNER_EMAIL ? 'Owner' : u.role }}
+                {{ OWNER_EMAILS.includes(u.email) ? 'Owner' : u.role }}
               </span>
             </div>
             <div class="user-row-actions">
               <button
-                v-if="u.email !== OWNER_EMAIL && u.role !== 'admin' && u.role !== 'owner'"
+                v-if="!OWNER_EMAILS.includes(u.email) && u.role !== 'admin' && u.role !== 'owner'"
                 @click="promoteAccess(u)"
                 class="action-btn promote-btn"
               >
                 Make Admin
               </button>
               <button
-                v-if="u.email !== OWNER_EMAIL && (u.role === 'admin')"
+                v-if="!OWNER_EMAILS.includes(u.email) && u.role === 'admin'"
                 @click="revokeAccess(u)"
                 class="action-btn revoke-btn"
               >

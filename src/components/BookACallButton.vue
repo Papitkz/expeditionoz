@@ -47,7 +47,7 @@ const openCalendly = () => {
 
 const launchPopup = () => {
   ;(window as any).Calendly?.initPopupWidget({
-    url: 'https://calendly.com/expeditionoz/talk-to-an-adventure-partner?month=2026-06',
+    url: 'https://calendly.com/expeditiondrenched/talk-to-an-adventure-partner',
   })
 }
 

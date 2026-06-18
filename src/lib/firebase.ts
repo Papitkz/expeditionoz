@@ -39,14 +39,13 @@ export function clearRecaptchaVerifier() {
 //   appId: "1:161777857257:web:526470afc6e3cf5b4cb678",
 //   measurementId: "G-6SRTR4NTKD"
 // }
-const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDG-i_PdGmDVQXWHQrhG5vUYAeofLZkf04",
-  authDomain: "expeditionoz-95b7a.firebaseapp.com",
-  projectId: "expeditionoz-95b7a",
-  storageBucket: "expeditionoz-95b7a.firebasestorage.app",
-  messagingSenderId: "799540419565",
-  appId: "1:799540419565:web:67ae3bf2342e37c63d65e4",
-  measurementId: "G-91CB7DKDGT"
+const FIREBASE_CONFIG  = {
+  apiKey: "AIzaSyA9ty2palwxsZx0GOdhuRqup94Dk2ilCuw",
+  authDomain: "expedition-drenched.firebaseapp.com",
+  projectId: "expedition-drenched",
+  storageBucket: "expedition-drenched.firebasestorage.app",
+  messagingSenderId: "1057203662798",
+  appId: "1:1057203662798:web:387b8078eefccf9412459f"
 };
 
 let app: FirebaseApp | null = null

@@ -24,7 +24,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore'
 
-const OWNER_EMAIL = 'johnfritzizar35@gmail.com'
+const OWNER_EMAILS = ['johnfritzizar35@gmail.com', 'expeditionoz.dev@gmail.com']
 
 const user = ref<User | null>(null)
 const loading = ref(true)
@@ -42,12 +42,14 @@ export interface FirebaseUser {
 
 export function useAdminAuth() {
   const isLoggedIn = computed(() => !!user.value && isAdmin.value)
-  const isOwner = computed(() => user.value?.email?.toLowerCase() === OWNER_EMAIL)
+  const isOwner = computed(() =>
+    OWNER_EMAILS.includes(user.value?.email?.toLowerCase() ?? '')
+  )
 
   async function resolveRole(currentUser: User) {
     const email = currentUser.email?.toLowerCase() || ''
 
-    if (email === OWNER_EMAIL) {
+    if (OWNER_EMAILS.includes(email)) {
       isAdmin.value = true
       userRole.value = 'owner'
       await ensureUserDoc(currentUser, 'owner')
@@ -168,7 +170,7 @@ export function useAdminAuth() {
 
     // Ensure user doc exists
     const email = googleUser.email?.toLowerCase() || ''
-    const isOwnerLogin = email === OWNER_EMAIL
+    const isOwnerLogin = OWNER_EMAILS.includes(email)
     const role = isOwnerLogin ? 'owner' : 'user'
 
     await ensureUserDoc(googleUser, role)
@@ -249,7 +251,7 @@ export function useAdminAuth() {
     const result = await createUserWithEmailAndPassword(auth, email, password)
     const newUser = result.user
 
-    const isOwnerSignup = newUser.email?.toLowerCase() === OWNER_EMAIL
+    const isOwnerSignup = OWNER_EMAILS.includes(newUser.email?.toLowerCase() ?? '')
     const role = isOwnerSignup ? 'owner' : 'user'
 
     // Create user doc
