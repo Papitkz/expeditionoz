@@ -52,7 +52,9 @@ interface NavItem {
 const baseNavItems: NavItem[] = [
   { label: 'Dashboard', icon: 'dashboard', to: '/admin/dashboard' },
   { label: 'Images', icon: 'image', to: '/admin/images' },
+  { label: 'Content', icon: 'info', to: '/admin/content' },
   { label: 'Trips & Pricing', icon: 'trips', to: '/admin/trips' },
+  { label: 'Limited Expeditions', icon: 'ship', to: '/admin/limited-expeditions' },
   { label: 'Blog Posts', icon: 'blog', to: '/admin/blogs' },
   { label: 'Bookings', icon: 'bookings', to: '/admin/bookings' },
   { label: 'Call Schedule', icon: 'call', to: '/admin/call-schedule' },
@@ -316,7 +318,7 @@ const iconPaths: Record<string, string> = {
 }
 
 .mobile-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -355,14 +357,14 @@ const iconPaths: Record<string, string> = {
 }
 
 .sidebar-brand {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 300;
   color: #c9a84c;
 }
 
 .sidebar-role {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.55rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -388,14 +390,14 @@ const iconPaths: Record<string, string> = {
 }
 
 .stat-value {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 400;
   color: #c9a84c;
 }
 
 .stat-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.5rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -420,7 +422,7 @@ const iconPaths: Record<string, string> = {
   background: rgba(201, 168, 76, 0.1);
   border: 1px solid rgba(201, 168, 76, 0.25);
   color: #c9a84c;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -462,7 +464,7 @@ const iconPaths: Record<string, string> = {
   background: none;
   border: none;
   color: rgba(248, 245, 239, 0.55);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -524,7 +526,7 @@ const iconPaths: Record<string, string> = {
   background: none;
   border: none;
   color: rgba(248, 245, 239, 0.45);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -564,7 +566,7 @@ const iconPaths: Record<string, string> = {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.85rem;
   font-weight: 600;
   color: #c9a84c;
@@ -600,7 +602,7 @@ const iconPaths: Record<string, string> = {
   background: none;
   border: 1px solid rgba(224, 123, 90, 0.2);
   color: rgba(224, 123, 90, 0.7);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -630,7 +632,7 @@ const iconPaths: Record<string, string> = {
 }
 
 .page-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 300;
   color: #f8f5ef;
@@ -638,7 +640,7 @@ const iconPaths: Record<string, string> = {
 }
 
 .breadcrumb {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   color: rgba(248, 245, 239, 0.35);

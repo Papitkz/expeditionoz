@@ -854,7 +854,7 @@ onMounted(loadSections)
   gap: 0.5rem;
   padding: 0.75rem 1.25rem;
   border: 1px solid;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.7rem;
   letter-spacing: 0.05em;
   backdrop-filter: blur(8px);
@@ -876,7 +876,7 @@ onMounted(loadSections)
   background: rgba(10,46,74,0.3);
   border: 1px solid rgba(201,168,76,0.12);
   color: rgba(248,245,239,0.55);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.62rem;
   letter-spacing: 0.08em;
   text-transform: capitalize;
@@ -909,7 +909,7 @@ onMounted(loadSections)
   z-index: 2;
 }
 .page-dot-lg { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.page-group-name { font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); flex: 1; }
+.page-group-name { font-family: var(--font-heading); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); flex: 1; }
 .page-group-count { font-size: 0.55rem; background: rgba(201,168,76,0.12); color: #c9a84c; padding: 0.1rem 0.4rem; font-weight: 700; }
 
 .page-component-banner {
@@ -922,7 +922,7 @@ onMounted(loadSections)
 }
 .pcb-left { display: flex; align-items: center; gap: 0.5rem; }
 .pcb-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.pcb-component { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 700; color: rgba(248,245,239,0.8); }
+.pcb-component { font-family: var(--font-heading); font-size: 0.65rem; font-weight: 700; color: rgba(248,245,239,0.8); }
 .pcb-file { font-family: 'monospace', monospace; font-size: 0.55rem; color: rgba(248,245,239,0.3); margin-top: 0.1rem; }
 
 .section-item {
@@ -960,7 +960,7 @@ onMounted(loadSections)
 .section-label-text { font-size: 0.72rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .section-badges-row { display: flex; gap: 0.25rem; margin-top: 0.2rem; }
 
-.badge-sm { font-size: 0.48rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.1rem 0.3rem; font-family: 'Montserrat', sans-serif; font-weight: 600; }
+.badge-sm { font-size: 0.48rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.1rem 0.3rem; font-family: var(--font-heading); font-weight: 600; }
 .badge-video { background: rgba(13,110,122,0.15); color: #4ea8c9; border: 1px solid rgba(78,168,201,0.2); }
 .badge-image { background: rgba(201,168,76,0.12); color: #c9a84c; border: 1px solid rgba(201,168,76,0.2); }
 .badge-empty { background: rgba(248,245,239,0.04); color: rgba(248,245,239,0.3); border: 1px solid rgba(248,245,239,0.08); }
@@ -993,7 +993,7 @@ onMounted(loadSections)
   color: rgba(248,245,239,0.3);
 }
 .empty-compass { opacity: 0.6; }
-.empty-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 300; color: rgba(248,245,239,0.4); }
+.empty-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 300; color: rgba(248,245,239,0.4); }
 .empty-sub { font-size: 0.75rem; color: rgba(248,245,239,0.25); text-align: center; max-width: 280px; }
 
 .editor-content { padding: 0; }
@@ -1024,7 +1024,7 @@ onMounted(loadSections)
   font-size: 0.65rem;
   font-weight: 600;
 }
-.crumb-desc { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 0.58rem; color: rgba(248,245,239,0.35); margin-left: 0.25rem; }
+.crumb-desc { font-family: var(--font-heading); font-weight: 400; font-size: 0.58rem; color: rgba(248,245,239,0.35); margin-left: 0.25rem; }
 
 /* Editor Header */
 .editor-header {
@@ -1037,10 +1037,10 @@ onMounted(loadSections)
   flex-wrap: wrap;
 }
 .editor-title-group { flex: 1; }
-.editor-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: #f8f5ef; line-height: 1.1; }
+.editor-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; color: #f8f5ef; line-height: 1.1; }
 .editor-meta-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.375rem; flex-wrap: wrap; }
 .section-key-code { font-family: 'monospace', monospace; font-size: 0.62rem; background: rgba(201,168,76,0.08); color: rgba(201,168,76,0.7); padding: 0.15rem 0.5rem; border: 1px solid rgba(201,168,76,0.15); }
-.page-chip { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.1em; text-transform: capitalize; padding: 0.2rem 0.5rem; border: 1px solid; border-radius: 2px; }
+.page-chip { font-family: var(--font-heading); font-size: 0.55rem; font-weight: 600; letter-spacing: 0.1em; text-transform: capitalize; padding: 0.2rem 0.5rem; border: 1px solid; border-radius: 2px; }
 .editor-desc { font-size: 0.72rem; color: rgba(248,245,239,0.45); margin-top: 0.5rem; }
 
 .header-actions { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; padding-top: 0.25rem; }
@@ -1053,11 +1053,11 @@ onMounted(loadSections)
   overflow: hidden;
 }
 .fill-bar { height: 100%; transition: width 0.5s ease; }
-.fill-label { position: absolute; top: -14px; right: 0; font-size: 0.48rem; color: rgba(248,245,239,0.3); font-family: 'Montserrat', sans-serif; }
+.fill-label { position: absolute; top: -14px; right: 0; font-size: 0.48rem; color: rgba(248,245,239,0.3); font-family: var(--font-heading); }
 
 .btn-edit, .btn-save-section {
   padding: 0.375rem 0.75rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -1082,9 +1082,9 @@ onMounted(loadSections)
 }
 .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
 .form-group.span2 { grid-column: span 2; }
-.form-label { font-family: 'Montserrat', sans-serif; font-size: 0.57rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(248,245,239,0.45); }
+.form-label { font-family: var(--font-heading); font-size: 0.57rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(248,245,239,0.45); }
 .label-hint { font-weight: 400; text-transform: none; letter-spacing: 0; color: rgba(248,245,239,0.25); }
-.form-input { background: rgba(7,26,43,0.7); border: 1px solid rgba(201,168,76,0.15); color: #f8f5ef; padding: 0.5rem 0.75rem; font-family: 'Inter', sans-serif; font-size: 0.78rem; outline: none; transition: border-color 0.2s; }
+.form-input { background: rgba(7,26,43,0.7); border: 1px solid rgba(201,168,76,0.15); color: #f8f5ef; padding: 0.5rem 0.75rem; font-family: var(--font-body); font-size: 0.78rem; outline: none; transition: border-color 0.2s; }
 .form-input:focus { border-color: #c9a84c; }
 
 /* Slide-down transition */
@@ -1107,7 +1107,7 @@ onMounted(loadSections)
   border: none;
   border-bottom: 2px solid transparent;
   color: rgba(248,245,239,0.45);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -1139,7 +1139,7 @@ onMounted(loadSections)
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -1174,7 +1174,7 @@ onMounted(loadSections)
   gap: 0.75rem;
   color: rgba(248,245,239,0.2);
   font-size: 0.7rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   letter-spacing: 0.1em;
 }
 .drag-overlay {
@@ -1187,7 +1187,7 @@ onMounted(loadSections)
   justify-content: center;
   gap: 0.5rem;
   color: #c9a84c;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -1199,7 +1199,7 @@ onMounted(loadSections)
   right: 0.625rem;
   background: rgba(7,26,43,0.9);
   border: 1px solid rgba(201,168,76,0.25);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.5rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -1221,7 +1221,7 @@ onMounted(loadSections)
   border: 1px solid rgba(201,168,76,0.1);
   color: #f8f5ef;
   padding: 0.5rem 0.75rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
   outline: none;
   transition: border-color 0.2s;
@@ -1233,7 +1233,7 @@ onMounted(loadSections)
   background: rgba(201,168,76,0.12);
   border: 1px solid rgba(201,168,76,0.2);
   color: #c9a84c;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -1255,7 +1255,7 @@ onMounted(loadSections)
   padding: 0.5rem 1rem;
   background: #c9a84c;
   color: #071a2b;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -1273,7 +1273,7 @@ onMounted(loadSections)
   background: none;
   border: 1px solid rgba(224,123,90,0.2);
   color: rgba(224,123,90,0.6);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -1293,7 +1293,7 @@ onMounted(loadSections)
   background: none;
   border: none;
   color: rgba(248,245,239,0.4);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -1349,7 +1349,7 @@ onMounted(loadSections)
   background: rgba(201,168,76,0.1);
   border: 1px solid rgba(201,168,76,0.2);
   color: rgba(248,245,239,0.55);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.5rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -1394,7 +1394,7 @@ onMounted(loadSections)
   border: 1px dashed rgba(201,168,76,0.1);
   color: rgba(248,245,239,0.25);
   font-size: 0.7rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   letter-spacing: 0.08em;
   margin-bottom: 0.875rem;
 }

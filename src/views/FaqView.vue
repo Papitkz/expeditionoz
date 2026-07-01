@@ -130,12 +130,13 @@ onMounted(async () => {
 <template>
   <div>
     <PageHero
+      component-name="FaqView"
       tag="Questions Answered"
       title="Frequently Asked"
       title-italic="Questions"
       subtitle="Everything you need to know before embarking on your Expedition OZ adventure."
-      image=""
-      image-alt="Clear turquoise waters of Ningaloo Reef"
+      fallback-image=""
+      fallback-alt="Clear turquoise waters of Ningaloo Reef"
       height="50vh"
     >
       <template #default>

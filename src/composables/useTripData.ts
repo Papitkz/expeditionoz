@@ -55,25 +55,49 @@ export interface TripItineraryDay {
 const FALLBACK_TRIPS: Record<string, Partial<TripData>> = {
   'ocean-safari': {
     slug: 'ocean-safari',
-    vesselName: 'Ocean Safari',
-    title: 'Ocean Safari',
-    subtitle: 'Northern Reef Expedition',
+    vesselName: 'Sylfia',
+    title: 'Ocean Safari Expedition',
+    subtitle: 'Our Signature Ningaloo Sailing Expedition',
     durationDays: 6,
     maxGuests: 12,
-    priceAud: 2495,
-    priceLabel: 'From $2,495 AUD',
+    priceAud: 5000,
+    priceLabel: 'From $5,000 AUD',
     description: '',
     shortDescription: '',
   },
   'dive-expedition': {
     slug: 'dive-expedition',
-    vesselName: 'Dive Expedition',
+    vesselName: 'Millennium',
     title: 'Dive Expedition',
-    subtitle: 'The Ultimate Reef Expedition',
+    subtitle: 'Our Flagship Liveaboard Dive Expedition',
     durationDays: 9,
     maxGuests: 14,
-    priceAud: 4495,
-    priceLabel: 'From $4,495 AUD',
+    priceAud: 9600,
+    priceLabel: 'From $9,600 AUD',
+    description: '',
+    shortDescription: '',
+  },
+  'ocean-safari-escape': {
+    slug: 'ocean-safari-escape',
+    vesselName: 'Sylfia',
+    title: 'Ocean Safari Escape',
+    subtitle: 'A Shorter Ningaloo Sailing Escape',
+    durationDays: 4,
+    maxGuests: 12,
+    priceAud: 3000,
+    priceLabel: 'From $3,000 AUD',
+    description: '',
+    shortDescription: '',
+  },
+  'dive-escape': {
+    slug: 'dive-escape',
+    vesselName: 'Millennium',
+    title: 'Dive Escape',
+    subtitle: 'A Shorter Ningaloo Dive Escape',
+    durationDays: 5,
+    maxGuests: 14,
+    priceAud: 4800,
+    priceLabel: 'From $4,800 AUD',
     description: '',
     shortDescription: '',
   },
@@ -117,19 +141,22 @@ export function useTripData(slug: string) {
         const featQ = query(
           collection(db, 'cms_trip_features'),
           where('tripId', '==', trip.value.id),
-          orderBy('sortOrder'),
         )
         const featSnap = await getDocs(featQ)
-        features.value = featSnap.docs.map((d) => d.data().featureText as string)
+        features.value = featSnap.docs
+          .map((d) => d.data() as TripFeature)
+          .sort((a, b) => a.sortOrder - b.sortOrder)
+          .map((d) => d.featureText)
 
         // Load itinerary
         const itiQ = query(
           collection(db, 'cms_trip_itinerary'),
           where('tripId', '==', trip.value.id),
-          orderBy('dayNumber'),
         )
         const itiSnap = await getDocs(itiQ)
-        itinerary.value = itiSnap.docs.map((d) => d.data() as TripItineraryDay)
+        itinerary.value = itiSnap.docs
+          .map((d) => d.data() as TripItineraryDay)
+          .sort((a, b) => a.dayNumber - b.dayNumber)
       }
     } catch (e) {
       console.warn(`useTripData: Firebase unavailable for slug "${slug}", using fallback`, e)

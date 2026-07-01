@@ -54,14 +54,19 @@ export function useComponentCMS(componentName: string) {
     loading.value = true
     try {
       const { db, collection, doc, getDocs, setDoc, updateDoc, deleteDoc, query, where, orderBy, serverTimestamp, writeBatch } = await getFirebase()
+      // NOTE: filtering by `component` AND sorting by `section`/`slotIndex` in the same
+      // Firestore query requires a composite index to exist in the Firebase console.
+      // That index was never created, so this query was silently failing (caught below)
+      // and returning zero results — which is why saved images weren't showing up on
+      // the public site even though they were saved successfully in the admin.
+      // Fix: filter only (single-field filters are always auto-indexed) and sort client-side.
       const q = query(
         collection(db, 'cms_component_content'),
-        where('component', '==', componentName),
-        orderBy('section'),
-        orderBy('slotIndex')
+        where('component', '==', componentName)
       )
       const snap = await getDocs(q)
       const data = snap.docs.map((d) => ({ id: d.id, ...d.data() } as ComponentContentItem))
+      data.sort((a, b) => (a.section === b.section ? a.slotIndex - b.slotIndex : a.section.localeCompare(b.section)))
       items.value = data
     } catch (e) {
       console.warn(`Component CMS load failed for ${componentName}:`, e)
@@ -129,14 +134,17 @@ export function useComponentCMS(componentName: string) {
 export async function getAllComponentContent(): Promise<ComponentContentItem[]> {
   try {
     const { db, collection, doc, getDocs, setDoc, updateDoc, deleteDoc, query, where, orderBy, serverTimestamp, writeBatch } = await getFirebase()
-    const q = query(
-      collection(db, 'cms_component_content'),
-      orderBy('component'),
-      orderBy('section'),
-      orderBy('slotIndex')
+    // Sorting by 3 fields (component, section, slotIndex) requires a composite index.
+    // Fetch everything and sort client-side instead so this never depends on an index
+    // existing in the Firebase console.
+    const snap = await getDocs(collection(db, 'cms_component_content'))
+    const data = snap.docs.map((d) => ({ id: d.id, ...d.data() } as ComponentContentItem))
+    data.sort((a, b) =>
+      a.component !== b.component ? a.component.localeCompare(b.component) :
+      a.section !== b.section ? a.section.localeCompare(b.section) :
+      a.slotIndex - b.slotIndex
     )
-    const snap = await getDocs(q)
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() } as ComponentContentItem))
+    return data
   } catch (e) {
     console.warn('Failed to load all component content:', e)
     return []
@@ -148,12 +156,12 @@ export async function getComponentContent(component: string): Promise<ComponentC
     const { db, collection, doc, getDocs, setDoc, updateDoc, deleteDoc, query, where, orderBy, serverTimestamp, writeBatch } = await getFirebase()
     const q = query(
       collection(db, 'cms_component_content'),
-      where('component', '==', component),
-      orderBy('section'),
-      orderBy('slotIndex')
+      where('component', '==', component)
     )
     const snap = await getDocs(q)
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() } as ComponentContentItem))
+    const data = snap.docs.map((d) => ({ id: d.id, ...d.data() } as ComponentContentItem))
+    data.sort((a, b) => (a.section === b.section ? a.slotIndex - b.slotIndex : a.section.localeCompare(b.section)))
+    return data
   } catch (e) {
     console.warn(`Failed to load component content for ${component}:`, e)
     return []

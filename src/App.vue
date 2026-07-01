@@ -6,6 +6,7 @@ import { useTheme } from '@/composables/useTheme'
 import NavBar from '@/components/NavBar.vue'
 import FooterSection from '@/components/FooterSection.vue'
 import CompassLoader from '@/components/CompassLoader.vue'
+import GoldCompassCursor from '@/components/GoldCompassCursor.vue'
 
 useLenis()
 
@@ -225,6 +226,9 @@ const animateRipples = () => {
     <!-- Skip to main content (accessibility) -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
+    <!-- Gold compass cursor (site-wide, desktop only) -->
+    <GoldCompassCursor v-if="!isAdminRoute" />
+
     <!-- Screen reader route announcer -->
     <div aria-live="polite" aria-atomic="true" class="sr-only">{{ routeAnnounce }}</div>
 
@@ -264,7 +268,15 @@ const animateRipples = () => {
     <div v-show="showContent && !isAdminRoute" class="content-wrapper">
       <NavBar />
       <main id="main-content" class="main-content">
-        <router-view />
+        <router-view v-slot="{ Component, route: currentRoute }">
+          <Transition
+            name="page-fade"
+            mode="out-in"
+            :duration="{ enter: 500, leave: 280 }"
+          >
+            <component :is="Component" :key="currentRoute.fullPath" />
+          </Transition>
+        </router-view>
       </main>
       <FooterSection class="fixed-footer" />
 
@@ -322,11 +334,7 @@ const animateRipples = () => {
 }
 
 @media (max-width: 768px) {
-  .main-content { margin-bottom: 440px; }
-}
-
-@media (max-width: 480px) {
-  .main-content { margin-bottom: 520px; }
+  .main-content { margin-bottom: 0; }
 }
 
 .fixed-footer {
@@ -335,6 +343,12 @@ const animateRipples = () => {
   left: 0;
   right: 0;
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .fixed-footer {
+    position: static;
+  }
 }
 
 /* Scroll to top — sits bottom-right, above the clock bar */
@@ -392,6 +406,24 @@ const animateRipples = () => {
   transform: scale(1.1);
 }
 
+/* ─── Page-level crossfade transition ─── */
+.page-fade-enter-active {
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.page-fade-leave-active {
+  transition: opacity 0.28s cubic-bezier(0.55, 0, 1, 0.45),
+              transform 0.28s cubic-bezier(0.55, 0, 1, 0.45);
+}
+.page-fade-enter-from {
+  opacity: 0;
+  transform: translateY(18px);
+}
+.page-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
 .fade-slide-enter-active,
 .fade-slide-leave-active {
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -420,7 +452,7 @@ const animateRipples = () => {
   justify-content: center;
   gap: 0.75rem;
   color: #fff;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -431,7 +463,7 @@ const animateRipples = () => {
   border: 1px solid rgba(255, 255, 255, 0.4);
   color: #fff;
   padding: 0.375rem 0.75rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.1em;

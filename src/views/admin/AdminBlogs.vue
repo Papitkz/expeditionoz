@@ -592,8 +592,8 @@ onMounted(loadBlogs)
 
 .blog-list { background: rgba(10,46,74,0.3); border: 1px solid rgba(201,168,76,0.1); overflow: hidden; display: flex; flex-direction: column; }
 .list-header { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(201,168,76,0.1); }
-.list-title { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); }
-.new-btn { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: #c9a84c; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 600; padding: 0.25rem 0.75rem; cursor: pointer; }
+.list-title { font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); }
+.new-btn { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: #c9a84c; font-family: var(--font-heading); font-size: 0.6rem; font-weight: 600; padding: 0.25rem 0.75rem; cursor: pointer; }
 .blogs-scroll { overflow-y: auto; max-height: 600px; }
 
 .blog-item { display: flex; gap: 0.75rem; padding: 0.75rem 1rem; background: none; border: none; border-bottom: 1px solid rgba(201,168,76,0.05); color: rgba(248,245,239,0.7); cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; }
@@ -614,9 +614,9 @@ onMounted(loadBlogs)
 .empty-editor { display: flex; align-items: center; justify-content: center; min-height: 400px; color: rgba(248,245,239,0.35); }
 
 .editor-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem; }
-.editor-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: #f8f5ef; }
+.editor-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; color: #f8f5ef; }
 .header-actions { display: flex; gap: 0.5rem; }
-.pub-btn, .edit-btn, .save-btn, .delete-btn, .cancel-btn { padding: 0.375rem 0.75rem; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: 1px solid; transition: all 0.2s; }
+.pub-btn, .edit-btn, .save-btn, .delete-btn, .cancel-btn { padding: 0.375rem 0.75rem; font-family: var(--font-heading); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: 1px solid; transition: all 0.2s; }
 .pub-active { background: rgba(76,175,80,0.15); border-color: rgba(76,175,80,0.3); color: #4caf50; }
 .pub-inactive { background: rgba(201,168,76,0.15); border-color: rgba(201,168,76,0.3); color: #c9a84c; }
 .edit-btn { background: rgba(10,46,74,0.5); border-color: rgba(201,168,76,0.2); color: rgba(248,245,239,0.7); }
@@ -630,14 +630,14 @@ onMounted(loadBlogs)
 .form-readonly .form-input { opacity: 0.7; cursor: default; }
 .form-group { display: flex; flex-direction: column; gap: 0.375rem; }
 .col-span-2 { grid-column: span 2; }
-.form-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); }
-.form-input { background: rgba(7,26,43,0.6); border: 1px solid rgba(201,168,76,0.2); color: #f8f5ef; padding: 0.625rem 0.75rem; font-family: 'Inter', sans-serif; font-size: 0.8rem; outline: none; transition: border-color 0.3s; -webkit-appearance: none; resize: vertical; }
+.form-label { font-family: var(--font-heading); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); }
+.form-input { background: rgba(7,26,43,0.6); border: 1px solid rgba(201,168,76,0.2); color: #f8f5ef; padding: 0.625rem 0.75rem; font-family: var(--font-body); font-size: 0.8rem; outline: none; transition: border-color 0.3s; -webkit-appearance: none; resize: vertical; }
 .form-input:focus { border-color: #c9a84c; }
 .content-area { min-height: 200px; }
 
 .form-actions { display: flex; gap: 0.75rem; justify-content: flex-end; }
 
-.sub-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.4); margin-bottom: 0.5rem; }
+.sub-label { font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.4); margin-bottom: 0.5rem; }
 .cover-preview { margin-top: 1rem; }
 .cover-img { max-width: 100%; max-height: 200px; object-fit: cover; border: 1px solid rgba(201,168,76,0.15); }
 
@@ -669,7 +669,7 @@ onMounted(loadBlogs)
   background: rgba(201, 168, 76, 0.1);
   border: 1px solid rgba(201, 168, 76, 0.2);
   color: #c9a84c;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.05em;

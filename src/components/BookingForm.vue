@@ -221,7 +221,7 @@ function resetForm() {
 }
 
 .form-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 1.75rem;
   font-weight: 300;
   color: #c9a84c;
@@ -263,7 +263,7 @@ function resetForm() {
 }
 
 .form-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -281,7 +281,7 @@ function resetForm() {
   border: 1px solid rgba(201, 168, 76, 0.2);
   color: #f8f5ef;
   padding: 0.75rem 1rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   outline: none;
   transition: border-color 0.3s;
@@ -313,7 +313,7 @@ select.form-input {
   background: #c9a84c;
   border: 1px solid #c9a84c;
   color: #071a2b;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -352,7 +352,7 @@ select.form-input {
 }
 
 .success-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 300;
   color: #4caf50;
@@ -371,7 +371,7 @@ select.form-input {
   background: transparent;
   border: 1px solid rgba(201, 168, 76, 0.3);
   color: #c9a84c;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.1em;

@@ -466,14 +466,14 @@ onMounted(loadBookings)
 .stat-cancelled { border-left: 3px solid #e07b5a; }
 
 .stat-value {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 1.75rem;
   font-weight: 300;
   color: #c9a84c;
 }
 
 .stat-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.55rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -498,7 +498,7 @@ onMounted(loadBookings)
   background: transparent;
   border: none;
   color: #f8f5ef;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   outline: none;
 }
@@ -561,7 +561,7 @@ onMounted(loadBookings)
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 600;
   color: #c9a84c;
@@ -598,7 +598,7 @@ onMounted(loadBookings)
 }
 
 .booking-status {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.55rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -660,7 +660,7 @@ onMounted(loadBookings)
 }
 
 .modal-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 1.75rem;
   font-weight: 300;
   color: #f8f5ef;
@@ -679,7 +679,7 @@ onMounted(loadBookings)
 }
 
 .section-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -745,7 +745,7 @@ onMounted(loadBookings)
   flex: 1;
   min-width: 120px;
   padding: 0.625rem 1rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.1em;

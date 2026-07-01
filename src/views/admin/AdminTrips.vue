@@ -51,22 +51,40 @@ interface ItineraryDay {
 
 const DEFAULT_TRIPS = [
   {
-    slug: 'ocean-safari', vesselName: 'Ocean Safari', title: 'Ocean Safari', subtitle: 'Northern Reef Expedition',
-    durationDays: 6, maxGuests: 12, priceAud: 2495, priceLabel: 'From $2,495 AUD',
-    description: 'Six extraordinary days exploring the untouched northern reaches of Ningaloo Reef aboard our elegant vessel.',
-    shortDescription: 'An intimate four-day voyage exploring the northern reaches of Ningaloo Reef.',
+    slug: 'ocean-safari', vesselName: 'Sylfia', title: 'Ocean Safari Expedition', subtitle: 'Our Signature Ningaloo Sailing Expedition',
+    durationDays: 6, maxGuests: 12, priceAud: 5000, priceLabel: 'From $5,000 AUD',
+    description: 'Our signature 5-night Ningaloo sailing expedition aboard Sylfia, with snorkelling, wildlife, remote anchorages and life at sea.',
+    shortDescription: 'Our signature 5-night Ningaloo sailing expedition aboard Sylfia.',
     heroImageUrl: 'https://images.pexels.com/photos/6530412/pexels-photo-6530412.jpegw',
     heroVideoUrl: 'https://cdn.pixabay.com/video/2021/02/18/65560-515098344_large.mp4',
     isPublished: true, sortOrder: 1, rezdyProductId: '',
   },
   {
-    slug: 'dive-expedition', vesselName: 'Dive Expedition', title: 'Dive Expedition', subtitle: 'The Ultimate Reef Expedition',
-    durationDays: 9, maxGuests: 14, priceAud: 4495, priceLabel: 'From $4,495 AUD',
-    description: 'Nine transformative days encompassing the full length of Ningaloo Reef. From whale sharks to humpback whales, this is the definitive ocean adventure.',
-    shortDescription: 'The ultimate seven-day immersion covering the full length of Ningaloo Reef.',
+    slug: 'dive-expedition', vesselName: 'Millennium', title: 'Dive Expedition', subtitle: 'Our Flagship Liveaboard Dive Expedition',
+    durationDays: 9, maxGuests: 14, priceAud: 9600, priceLabel: 'From $9,600 AUD',
+    description: 'An 8-night liveaboard ocean expedition aboard Millennium, created for divers and snorkellers who want to experience Ningaloo at its most remote.',
+    shortDescription: 'Our flagship 8-night liveaboard dive expedition aboard Millennium.',
     heroImageUrl: 'https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=1920&q=80',
     heroVideoUrl: 'https://videos.pexels.com/video-files/30351567/30351567-uhd_2560_1440_25fps.mp4',
     isPublished: true, sortOrder: 2, rezdyProductId: '',
+  },
+  {
+    slug: 'ocean-safari-escape', vesselName: 'Sylfia', title: 'Ocean Safari Escape', subtitle: 'A Shorter Ningaloo Sailing Escape',
+    durationDays: 4, maxGuests: 12, priceAud: 3000, priceLabel: 'From $3,000 AUD',
+    description: 'A 3-night Ningaloo sailing escape aboard Sylfia, exploring remote reefs, wildlife, beaches and sunset anchorages.',
+    shortDescription: 'A short, immersive Ningaloo escape aboard Sylfia.',
+    heroImageUrl: 'https://images.pexels.com/photos/6530412/pexels-photo-6530412.jpegw',
+    heroVideoUrl: 'https://cdn.pixabay.com/video/2021/02/18/65560-515098344_large.mp4',
+    isPublished: true, sortOrder: 3, rezdyProductId: '',
+  },
+  {
+    slug: 'dive-escape', vesselName: 'Millennium', title: 'Dive Escape', subtitle: 'A Shorter Ningaloo Dive Escape',
+    durationDays: 5, maxGuests: 14, priceAud: 4800, priceLabel: 'From $4,800 AUD',
+    description: 'A 4-night Ningaloo dive escape aboard Millennium, exploring remote reef sites, whale sharks, mantas and coral gardens.',
+    shortDescription: 'A short, immersive Ningaloo dive escape aboard Millennium.',
+    heroImageUrl: '',
+    heroVideoUrl: '',
+    isPublished: true, sortOrder: 4, rezdyProductId: '',
   },
 ]
 
@@ -118,8 +136,10 @@ async function selectTrip(trip: Trip) {
 async function loadFeatures(tripId: string) {
   try {
     const db = getFirebaseDb()
-    const snap = await getDocs(query(collection(db, 'cms_trip_features'), where('tripId', '==', tripId), orderBy('sortOrder')))
-    features.value = snap.docs.map(d => ({ id: d.id, ...d.data() } as Feature))
+    const snap = await getDocs(query(collection(db, 'cms_trip_features'), where('tripId', '==', tripId)))
+    features.value = snap.docs
+      .map(d => ({ id: d.id, ...d.data() } as Feature))
+      .sort((a, b) => a.sortOrder - b.sortOrder)
   } catch (e) {
     console.warn('Firestore unavailable, cannot load features:', e)
     features.value = []
@@ -129,8 +149,10 @@ async function loadFeatures(tripId: string) {
 async function loadItinerary(tripId: string) {
   try {
     const db = getFirebaseDb()
-    const snap = await getDocs(query(collection(db, 'cms_trip_itinerary'), where('tripId', '==', tripId), orderBy('dayNumber')))
-    itinerary.value = snap.docs.map(d => ({ id: d.id, ...d.data() } as ItineraryDay))
+    const snap = await getDocs(query(collection(db, 'cms_trip_itinerary'), where('tripId', '==', tripId)))
+    itinerary.value = snap.docs
+      .map(d => ({ id: d.id, ...d.data() } as ItineraryDay))
+      .sort((a, b) => a.dayNumber - b.dayNumber)
   } catch (e) {
     console.warn('Firestore unavailable, cannot load itinerary:', e)
     itinerary.value = []
@@ -281,7 +303,7 @@ onMounted(loadTrips)
             </div>
             <div class="form-group">
               <label class="form-label">Price Label</label>
-              <input v-model="selectedTrip.priceLabel" :readonly="!editing" class="form-input" placeholder="e.g. From $2,495 AUD" />
+              <input v-model="selectedTrip.priceLabel" :readonly="!editing" class="form-input" placeholder="e.g. From $5,000 AUD" />
             </div>
             <div class="form-group">
               <label class="form-label">Rezdy Product ID</label>
@@ -363,7 +385,7 @@ onMounted(loadTrips)
 .manager-grid { display: grid; grid-template-columns: 280px 1fr; gap: 1.5rem; min-height: 500px; }
 
 .trip-list { background: rgba(10,46,74,0.3); border: 1px solid rgba(201,168,76,0.1); overflow: hidden; display: flex; flex-direction: column; }
-.list-title { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); padding: 1rem; border-bottom: 1px solid rgba(201,168,76,0.1); }
+.list-title { font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); padding: 1rem; border-bottom: 1px solid rgba(201,168,76,0.1); }
 .trips-scroll { overflow-y: auto; max-height: 600px; }
 
 .trip-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: none; border: none; border-bottom: 1px solid rgba(201,168,76,0.05); color: rgba(248,245,239,0.7); cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; }
@@ -381,9 +403,9 @@ onMounted(loadTrips)
 .empty-editor { display: flex; align-items: center; justify-content: center; min-height: 400px; color: rgba(248,245,239,0.35); }
 
 .editor-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem; }
-.editor-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: #f8f5ef; }
+.editor-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; color: #f8f5ef; }
 .header-actions { display: flex; gap: 0.5rem; }
-.pub-btn, .edit-btn, .save-btn { padding: 0.375rem 0.75rem; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: 1px solid; transition: all 0.2s; }
+.pub-btn, .edit-btn, .save-btn { padding: 0.375rem 0.75rem; font-family: var(--font-heading); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: 1px solid; transition: all 0.2s; }
 .pub-active { background: rgba(76,175,80,0.15); border-color: rgba(76,175,80,0.3); color: #4caf50; }
 .pub-inactive { background: rgba(201,168,76,0.15); border-color: rgba(201,168,76,0.3); color: #c9a84c; }
 .edit-btn { background: rgba(10,46,74,0.5); border-color: rgba(201,168,76,0.2); color: rgba(248,245,239,0.7); }
@@ -395,13 +417,13 @@ onMounted(loadTrips)
 .form-readonly .form-input { opacity: 0.7; cursor: default; }
 .form-group { display: flex; flex-direction: column; gap: 0.375rem; }
 .col-span-2 { grid-column: span 2; }
-.form-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); }
-.form-input { background: rgba(7,26,43,0.6); border: 1px solid rgba(201,168,76,0.2); color: #f8f5ef; padding: 0.625rem 0.75rem; font-family: 'Inter', sans-serif; font-size: 0.8rem; outline: none; transition: border-color 0.3s; -webkit-appearance: none; }
+.form-label { font-family: var(--font-heading); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); }
+.form-input { background: rgba(7,26,43,0.6); border: 1px solid rgba(201,168,76,0.2); color: #f8f5ef; padding: 0.625rem 0.75rem; font-family: var(--font-body); font-size: 0.8rem; outline: none; transition: border-color 0.3s; -webkit-appearance: none; }
 .form-input:focus { border-color: #c9a84c; }
 .form-input.sm { padding: 0.5rem 0.625rem; font-size: 0.7rem; }
 
 .sub-section { margin-bottom: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(201,168,76,0.1); }
-.sub-title { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); margin-bottom: 1rem; }
+.sub-title { font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,239,0.5); margin-bottom: 1rem; }
 
 .features-list { display: flex; flex-direction: column; gap: 0.375rem; margin-bottom: 0.75rem; }
 .feature-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0.75rem; background: rgba(7,26,43,0.4); border: 1px solid rgba(201,168,76,0.08); font-size: 0.8rem; color: rgba(248,245,239,0.7); }
@@ -409,14 +431,14 @@ onMounted(loadTrips)
 .remove-btn:hover { color: #e07b5a; }
 
 .add-row { display: flex; gap: 0.5rem; }
-.add-btn { padding: 0.5rem 1rem; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: #c9a84c; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.add-btn { padding: 0.5rem 1rem; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: #c9a84c; font-family: var(--font-heading); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
 .add-btn:hover { background: rgba(201,168,76,0.25); }
 
 .itinerary-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; }
 .itinerary-item { padding: 0.75rem; background: rgba(7,26,43,0.4); border: 1px solid rgba(201,168,76,0.08); }
 .day-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
-.day-number { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 700; color: #c9a84c; letter-spacing: 0.1em; white-space: nowrap; }
-.day-title-input { background: transparent; border: none; border-bottom: 1px solid rgba(201,168,76,0.15); color: #f8f5ef; font-family: 'Cormorant Garamond', serif; font-size: 1rem; flex: 1; outline: none; }
+.day-number { font-family: var(--font-heading); font-size: 0.65rem; font-weight: 700; color: #c9a84c; letter-spacing: 0.1em; white-space: nowrap; }
+.day-title-input { background: transparent; border: none; border-bottom: 1px solid rgba(201,168,76,0.15); color: #f8f5ef; font-family: var(--font-display); font-size: 1rem; flex: 1; outline: none; }
 .day-meta-row { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
 
 .add-day-form { padding-top: 0.75rem; border-top: 1px dashed rgba(201,168,76,0.15); }

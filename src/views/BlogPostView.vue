@@ -65,6 +65,7 @@ const openLightbox = (index: number) => {
     <div v-else>
       <!-- Hero -->
       <PageHero
+      component-name="BlogPostView"
         tag="Expedition Journal"
         :title="post.title"
         :subtitle="post.excerpt"
@@ -99,11 +100,11 @@ const openLightbox = (index: number) => {
 
           <!-- Meta -->
           <div class="flex items-center gap-4 mb-10" style="color: var(--color-gold-400); opacity: 0.75;">
-            <span class="text-xs font-semibold tracking-widest uppercase" style="font-family: 'Montserrat', sans-serif;">
+            <span class="text-xs font-semibold tracking-widest uppercase" style="font-family: var(--font-heading);">
               {{ post.date || 'Recent' }}
             </span>
             <span class="w-5 h-px" style="background: var(--color-gold-400);"></span>
-            <span class="text-xs tracking-widest uppercase" style="font-family: 'Montserrat', sans-serif;">
+            <span class="text-xs tracking-widest uppercase" style="font-family: var(--font-heading);">
               {{ post.author || 'Expedition Team' }}
             </span>
           </div>
@@ -124,7 +125,7 @@ const openLightbox = (index: number) => {
               v-for="tag in post.tags"
               :key="tag"
               class="px-3 py-1 text-xs tracking-widest uppercase"
-              style="font-family: 'Montserrat', sans-serif; border: 1px solid rgba(201,168,76,0.2); color: var(--color-gold-400); opacity: 0.7;"
+              style="font-family: var(--font-heading); border: 1px solid rgba(201,168,76,0.2); color: var(--color-gold-400); opacity: 0.7;"
             >
               {{ tag }}
             </span>
@@ -132,7 +133,7 @@ const openLightbox = (index: number) => {
 
           <!-- Gallery -->
           <div v-if="post.gallery?.length" class="mt-16">
-            <h3 class="text-sm tracking-widest uppercase mb-6" style="font-family: 'Montserrat', sans-serif; color: var(--color-gold-400); opacity: 0.75;">
+            <h3 class="text-sm tracking-widest uppercase mb-6" style="font-family: var(--font-heading); color: var(--color-gold-400); opacity: 0.75;">
               Gallery
             </h3>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -156,7 +157,7 @@ const openLightbox = (index: number) => {
           <div class="mt-16 pt-8" style="border-top: 1px solid rgba(201,168,76,0.1);">
             <button
               class="flex items-center gap-3 text-xs tracking-widest uppercase transition-opacity hover:opacity-100"
-              style="font-family: 'Montserrat', sans-serif; color: var(--color-gold-400); opacity: 0.6;"
+              style="font-family: var(--font-heading); color: var(--color-gold-400); opacity: 0.6;"
               @click="goBack"
             >
               <v-icon size="14">mdi-arrow-left</v-icon>

@@ -203,7 +203,7 @@ const EXPERIENCE_DEFAULTS = [
     fallbackImage: 'https://cdn.pixabay.com/photo/2018/08/08/16/15/sailing-boat-3592517_1280.jpg',
   },
   {
-    label: 'FREEDIVING',
+    label: 'REEF SNORKELLING',
     description: 'Explore untouched reef systems with expert guides.',
     fallbackImage: 'https://cdn.pixabay.com/photo/2025/01/12/15/57/diver-9328625_1280.jpg',
   },
@@ -223,7 +223,7 @@ const EXPERIENCE_DEFAULTS = [
     fallbackImage: 'https://cdn.pixabay.com/photo/2019/06/26/09/52/shit-image-4300034_1280.jpg',
   },
   {
-    label: 'SUNSET DINNERS',
+    label: 'SUNSET SAILING',
     description: 'Enjoy chef crafted dining under golden skies.',
     fallbackImage: 'https://cdn.pixabay.com/photo/2020/04/22/07/41/sunset-5076385_1280.jpg',
   },
@@ -410,7 +410,7 @@ onUnmounted(() => {
   max-width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  background: radial-gradient(circle at top, #06314f 0%, #041a2b 55%);
+  background: #041a2b;
   padding: 60px 20px 40px 20px;
   overflow: visible; 
 }

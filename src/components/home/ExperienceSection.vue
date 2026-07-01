@@ -1,10 +1,9 @@
 <template>
-  <section
-    class="experience-section"
-    id="experience"
-  >
+  <section class="experience-section" id="experience">
     <div v-if="hasTerrain" class="terrain-layer">
-      <img :src="terrainImage" alt="Ningaloo Reef" loading="lazy" />
+      <div class="terrain-img-wrap">
+        <img :src="terrainImage" alt="Ningaloo Reef" loading="lazy" class="terrain-img" />
+      </div>
       <div class="terrain-overlay"></div>
     </div>
 
@@ -13,12 +12,8 @@
     <div class="experience-content">
       <div class="experience-text">
         <h2 class="experience-headline">
-          REMOTE. PRISTINE. UNTOUCHED.
+          OUR DESTINATIONS
         </h2>
-
-        <p class="experience-subhead">
-          BEYOND THE DAY BOATS.
-        </p>
 
         <p class="experience-body">
           Sleep anchored on Ningaloo Reef and be the first in the water each and every day.
@@ -28,71 +23,36 @@
       </div>
 
       <div class="experience-map">
-        <!-- High-contrast Luxury Navy & Gold Compass -->
         <div class="compass">
-        <svg width="84" height="84" viewBox="0 0 80 80" fill="none">
-  <!-- Outer rings -->
-        <circle cx="40" cy="40" r="37" fill="#071a2b" stroke="#c9a84c" stroke-width="1.5"/>
-        <circle cx="40" cy="40" r="33" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="2 2" stroke-opacity="0.8"/>
-        <circle cx="40" cy="40" r="28" stroke="#c9a84c" stroke-width="0.75" stroke-dasharray="4 2" stroke-opacity="0.6"/>
-        
-        <!-- Axis lines -->
-        <line x1="40" y1="4" x2="40" y2="76" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.4"/>
-        <line x1="4" y1="40" x2="76" y2="40" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.4"/>
-        
-        <!-- === LONG CARDINAL NEEDLES (N, S, E, W) === -->
-        <!-- North - full gold, longest, sharpest -->
-        <path d="M40 2 L42 40 L40 38 L38 40 Z" fill="#c9a84c" stroke="#c9a84c" stroke-width="0.5"/>
-        
-        <!-- South - same length, slightly darker -->
-        <path d="M40 78 L38 40 L40 42 L42 40 Z" fill="#c9a84c" fill-opacity="0.6" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.6"/>
-        
-        <!-- East -->
-        <path d="M78 40 L40 38 L42 40 L40 42 Z" fill="#c9a84c" fill-opacity="0.6" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.6"/>
-        
-        <!-- West -->
-        <path d="M2 40 L40 42 L38 40 L40 38 Z" fill="#c9a84c" fill-opacity="0.6" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.6"/>
-        
-        <!-- === SHORT INTERCARDINAL NEEDLES (NE, SE, SW, NW) === -->
-        <!-- These are about 60% the length of cardinals -->
-        <path d="M58 22 L41 39 L40 38 L39 39 Z" fill="#c9a84c" fill-opacity="0.35" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.4"/>
-        <path d="M58 58 L39 41 L40 42 L41 41 Z" fill="#c9a84c" fill-opacity="0.35" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.4"/>
-        <path d="M22 58 L39 41 L38 40 L39 39 Z" fill="#c9a84c" fill-opacity="0.35" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.4"/>
-        <path d="M22 22 L41 39 L40 38 L39 39 Z" fill="#c9a84c" fill-opacity="0.35" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.4"/>
-        
-        <!-- Center pivot -->
-        <circle cx="40" cy="40" r="3" fill="#c9a84c"/>
-        <circle cx="40" cy="40" r="1.5" fill="#071a2b"/>
-        
-        <!-- Typography -->
-        <text x="40" y="16" text-anchor="middle" fill="#c9a84c" font-size="11" font-family="'Times New Roman', serif" font-weight="900">N</text>
-        <text x="40" y="69" text-anchor="middle" fill="#c9a84c" font-size="9" font-family="'Times New Roman', serif" font-weight="700" fill-opacity="0.9">S</text>
-        <text x="69" y="43" text-anchor="middle" fill="#c9a84c" font-size="9" font-family="'Times New Roman', serif" font-weight="700" fill-opacity="0.9">E</text>
-        <text x="11" y="43" text-anchor="middle" fill="#c9a84c" font-size="9" font-family="'Times New Roman', serif" font-weight="700" fill-opacity="0.9">W</text>
-      </svg>
+          <svg width="84" height="84" viewBox="0 0 80 80" fill="none">
+            <circle cx="40" cy="40" r="37" fill="#071a2b" stroke="#c9a84c" stroke-width="1.5" />
+            <circle cx="40" cy="40" r="33" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="2 2" stroke-opacity="0.8" />
+            <circle cx="40" cy="40" r="28" stroke="#c9a84c" stroke-width="0.75" stroke-dasharray="4 2" stroke-opacity="0.6" />
+
+            <line x1="40" y1="4" x2="40" y2="76" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.4" />
+            <line x1="4" y1="40" x2="76" y2="40" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.4" />
+
+            <path d="M40 2 L42 40 L40 38 L38 40 Z" fill="#c9a84c" stroke="#c9a84c" stroke-width="0.5" />
+            <path d="M40 78 L38 40 L40 42 L42 40 Z" fill="#c9a84c" fill-opacity="0.6" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.6" />
+            <path d="M78 40 L40 38 L42 40 L40 42 Z" fill="#c9a84c" fill-opacity="0.6" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.6" />
+            <path d="M2 40 L40 42 L38 40 L40 38 Z" fill="#c9a84c" fill-opacity="0.6" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.6" />
+
+            <path d="M58 22 L41 39 L40 38 L39 39 Z" fill="#c9a84c" fill-opacity="0.35" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.4" />
+            <path d="M58 58 L39 41 L40 42 L41 41 Z" fill="#c9a84c" fill-opacity="0.35" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.4" />
+            <path d="M22 58 L39 41 L38 40 L39 39 Z" fill="#c9a84c" fill-opacity="0.35" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.4" />
+            <path d="M22 22 L41 39 L40 38 L39 39 Z" fill="#c9a84c" fill-opacity="0.35" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.4" />
+
+            <circle cx="40" cy="40" r="3" fill="#c9a84c" />
+            <circle cx="40" cy="40" r="1.5" fill="#071a2b" />
+
+            <text x="40" y="16" text-anchor="middle" fill="#c9a84c" font-size="11" font-family="'Times New Roman', serif" font-weight="900">N</text>
+            <text x="40" y="69" text-anchor="middle" fill="#c9a84c" font-size="9" font-family="'Times New Roman', serif" font-weight="700" fill-opacity="0.9">S</text>
+            <text x="69" y="43" text-anchor="middle" fill="#c9a84c" font-size="9" font-family="'Times New Roman', serif" font-weight="700" fill-opacity="0.9">E</text>
+            <text x="11" y="43" text-anchor="middle" fill="#c9a84c" font-size="9" font-family="'Times New Roman', serif" font-weight="700" fill-opacity="0.9">W</text>
+          </svg>
         </div>
 
-        <svg
-          class="route-svg"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <!-- SVG Mask containing the continuous animating line -->
-            <mask id="route-mask">
-              <path
-                class="mask-line"
-                :class="{ 'mask-line--drawn': routeDrawn }"
-                d="M 88,80 Q 73,64 56,46 T 36,28 T 16,17"
-                fill="none"
-                stroke="#ffffff"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </mask>
-          </defs>
-
-          <!-- Rendered White Dashed Trail (Revealed dynamically by mask) -->
+        <svg class="route-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path
             class="route-trail"
             d="M 88,80 Q 73,64 56,46 T 36,28 T 16,17"
@@ -101,7 +61,6 @@
             stroke-width="0.6"
             stroke-linecap="round"
             stroke-dasharray="1.5 2.5"
-            mask="url(#route-mask)"
           />
         </svg>
 
@@ -114,11 +73,11 @@
         >
           <div class="waypoint-marker">
             <svg class="anchor-icon" width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <circle cx="11" cy="11" r="10" fill="rgba(7,26,43,0.85)" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
-              <circle cx="11" cy="6" r="2.5" stroke="rgba(255,255,255,0.9)" stroke-width="1" fill="none"/>
-              <line x1="11" y1="8.5" x2="11" y2="16" stroke="rgba(255,255,255,0.9)" stroke-width="1.2" stroke-linecap="round"/>
-              <line x1="7.5" y1="12" x2="14.5" y2="12" stroke="rgba(255,255,255,0.9)" stroke-width="1" stroke-linecap="round"/>
-              <path d="M7.5 16 Q11 19 14.5 16" stroke="rgba(255,255,255,0.9)" stroke-width="1" fill="none" stroke-linecap="round"/>
+              <circle cx="11" cy="11" r="10" fill="rgba(7,26,43,0.85)" stroke="rgba(255,255,255,0.6)" stroke-width="1" />
+              <circle cx="11" cy="6" r="2.5" stroke="rgba(255,255,255,0.9)" stroke-width="1" fill="none" />
+              <line x1="11" y1="8.5" x2="11" y2="16" stroke="rgba(255,255,255,0.9)" stroke-width="1.2" stroke-linecap="round" />
+              <line x1="7.5" y1="12" x2="14.5" y2="12" stroke="rgba(255,255,255,0.9)" stroke-width="1" stroke-linecap="round" />
+              <path d="M7.5 16 Q11 19 14.5 16" stroke="rgba(255,255,255,0.9)" stroke-width="1" fill="none" stroke-linecap="round" />
             </svg>
             <div class="marker-glow"></div>
           </div>
@@ -139,59 +98,53 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useComponentCMS } from '@/composables/useComponentCMS'
 
 const cms = useComponentCMS('ExperienceSection')
 
-/* =========================================
-   CMS IMAGE
-========================================= */
 const terrainImage = computed(() => {
-  const items = cms.getSection('experiences')
-  return items[0]?.imageUrl || ''
+  // Uses 'experiences' section slot 0 — matches AdminImages registry
+  return cms.getSlot('experiences', 0)?.imageUrl || ''
 })
 const hasTerrain = computed(() => !!terrainImage.value)
 
-/* =========================================
-   WAYPOINTS
-========================================= */
 const waypoints = ref([
   {
     id: 'murion',
     label: 'MURION\nISLANDS',
     x: 16,
     y: 17,
-    desc: 'Remote island chain. Coral gardens and turtle nesting beaches.'
+    desc: 'Uninhabited pristine sandy white beaches surrounded by coral reefs.',
   },
   {
-    id: 'gulf',
-    label: 'EXMOUTH\nGULF',
+    id: 'coral-bay',
+    label: 'CORAL\nBAY',
     x: 36,
     y: 28,
-    desc: 'Protected anchorage with calm waters and night snorkelling.'
-  },
-  {
-    id: 'reef',
-    label: 'NINGALOO\nREEF',
-    x: 56,
-    y: 46,
-    desc: 'Whale shark territory and untouched reef systems.'
+    desc: 'Southern most anchorage known for its manta ray population and fish cleaning station.',
   },
   {
     id: 'yardie',
     label: 'YARDIE\nCREEK',
-    x: 73,
-    y: 64,
-    desc: 'Turquoise canyon waters and kayaking adventures.'
+    x: 56,
+    y: 46,
+    desc: 'Crystal blue turquoise waters and kayaking adventures.',
   },
   {
-    id: 'exmouth',
-    label: 'EXMOUTH',
+    id: 'cape-range',
+    label: 'CAPE\nRANGE',
+    x: 73,
+    y: 64,
+    desc: 'Most famous snorkel and dive sites along the Ningaloo Reef.',
+  },
+  {
+    id: 'gulf',
+    label: 'THE\nGULF',
     x: 88,
     y: 80,
-    desc: 'Final anchorage and departure point.'
-  }
+    desc: 'Protected anchorages known for rare wildlife along the mangrove forests. Humpback whale watching hotspot from August to October.',
+  },
 ])
 
 const activeWaypoint = ref<string | null>(null)
@@ -199,58 +152,58 @@ function toggleWaypoint(id: string) {
   activeWaypoint.value = activeWaypoint.value === id ? null : id
 }
 
-/* =========================================
-   ROUTE ANIMATION
-========================================= */
-const routeDrawn = ref(false)
-let observer: IntersectionObserver | null = null
-
 onMounted(async () => {
   await cms.load()
-  observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          routeDrawn.value = true
-        }, 400)
-      }
-    })
-  }, { threshold: 0.25 })
-
-  const section = document.getElementById('experience')
-  if (section) observer.observe(section)
-})
-
-onUnmounted(() => {
-  observer?.disconnect()
 })
 </script>
 
 <style scoped>
+:global(html, body) {
+  margin: 0;
+  padding: 0;
+}
+
 .experience-section {
   position: relative;
-  width: 100%;
+  width: calc(100% - 3rem);
   min-height: 380px;
-  height: auto;
   overflow: hidden;
   background: #071a2b;
   border: 1px solid rgba(201, 168, 76, 0.35);
   border-radius: 6px;
-  margin: 0;
+  margin: 3rem auto;
+  padding: 0;
+  box-sizing: border-box;
   isolation: isolate;
 }
 
-.terrain-layer {
+.terrain-layer,
+.fallback-bg {
   position: absolute;
   inset: 0;
+}
+
+.terrain-layer {
   z-index: 1;
 }
 
-.terrain-layer img {
+.terrain-img {
+  object-fit: cover;
+  object-position: center center; /* try this instead of 40% */
+}
+
+.terrain-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 40%;
+  display: block;
+  animation: terrain-zoom 24s ease-in-out infinite alternate;
+}
+
+@keyframes terrain-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
 }
 
 .terrain-overlay {
@@ -258,17 +211,15 @@ onUnmounted(() => {
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(7, 26, 43, 1) 0%,
-    rgba(7, 26, 43, 0.97) 20%,
-    rgba(7, 26, 43, 0.72) 42%,
-    rgba(7, 26, 43, 0.18) 68%,
-    rgba(7, 26, 43, 0.04) 100%
+    rgba(7, 26, 43, 0.96) 0%,
+    rgba(7, 26, 43, 0.88) 18%,
+    rgba(7, 26, 43, 0.55) 40%,
+    rgba(7, 26, 43, 0.18) 65%,
+    rgba(7, 26, 43, 0.08) 100%
   );
 }
 
 .fallback-bg {
-  position: absolute;
-  inset: 0;
   background: #071a2b;
 }
 
@@ -289,28 +240,18 @@ onUnmounted(() => {
 }
 
 .experience-headline {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-display);
   font-size: clamp(1.25rem, 1.5vw, 1.6rem);
   font-weight: 300;
   color: #f5f1e8;
   line-height: 1.18;
   text-transform: uppercase;
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.85rem;
   letter-spacing: 0.01em;
 }
 
-.experience-subhead {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #c9a84c;
-  font-weight: 700;
-  margin: 0 0 0.85rem;
-}
-
 .experience-body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   color: rgba(255, 255, 255, 0.78);
   font-size: 0.78rem;
   line-height: 1.85;
@@ -324,7 +265,6 @@ onUnmounted(() => {
   min-height: 300px;
 }
 
-/* Enhanced Navy & Gold Compass Configuration */
 .compass {
   position: absolute;
   top: -10px;
@@ -333,14 +273,6 @@ onUnmounted(() => {
   opacity: 0.95;
   pointer-events: none;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
-  animation: compass-float 6s ease-in-out infinite;
-}
-
-@keyframes compass-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-2px) rotate(0.5deg); }
-  50% { transform: translateY(0) rotate(0deg); }
-  75% { transform: translateY(2px) rotate(-0.5deg); }
 }
 
 .route-svg {
@@ -349,17 +281,6 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   z-index: 2;
-}
-
-/* The continuous mask line dictates the snake animation from bottom to top */
-.mask-line {
-  stroke-dasharray: 200;
-  stroke-dashoffset: 200;
-  transition: stroke-dashoffset 2.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mask-line--drawn {
-  stroke-dashoffset: 0;
 }
 
 .route-trail {
@@ -395,12 +316,6 @@ onUnmounted(() => {
   transform: scale(1.15);
 }
 
-.marker-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: 999px;
-}
-
 .marker-glow::before {
   content: '';
   position: absolute;
@@ -424,7 +339,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -456,7 +371,7 @@ onUnmounted(() => {
   font-size: 0.72rem;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.9);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
 }
 
 .tooltip-enter-active,
@@ -472,7 +387,9 @@ onUnmounted(() => {
 
 @media (max-width: 1100px) {
   .experience-section {
+    width: calc(100% - 3rem);
     min-height: 420px;
+    margin: 2.25rem auto;
   }
 
   .experience-content {
@@ -491,10 +408,10 @@ onUnmounted(() => {
     height: 280px;
     min-height: 280px;
   }
-  
+
   .compass {
     top: -20px;
-    right: 0px;
+    right: 0;
   }
 }
 
@@ -529,6 +446,8 @@ onUnmounted(() => {
 
 @media (max-width: 540px) {
   .experience-section {
+    width: calc(100% - 2rem);
+    margin: 1.75rem auto;
     min-height: 560px;
   }
 
@@ -547,6 +466,11 @@ onUnmounted(() => {
 
   .waypoint-tooltip p {
     font-size: 0.66rem;
+  }
+}
+@media (max-width: 540px) {
+  .experience-section {
+    margin: 1.75rem auto 0; /* remove bottom margin */
   }
 }
 </style>

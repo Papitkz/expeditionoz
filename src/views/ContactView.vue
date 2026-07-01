@@ -44,7 +44,14 @@ useSEO({
   }
 })
 
-// ── CMS: hero media ────────────────────────────────────────────────────────
+// ── CMS: editable hero text (Admin → Content) ─────────────────────────────
+const heroTitle = ref('Check')
+const heroSubtitle = ref('Reach out to our team to discuss dates, pricing, and all the details for your perfect expedition.')
+onMounted(async () => {
+  const { getEditableContent } = await import('@/composables/usePageContent')
+  heroTitle.value = await getEditableContent('contact', 'hero', 'title', heroTitle.value)
+  heroSubtitle.value = await getEditableContent('contact', 'hero', 'subtitle', heroSubtitle.value)
+})
 const heroCms = useComponentCMS('ContactView')
 const heroImage = computed(() => heroCms.getImageUrl('hero', 0))
 const heroVideo = computed(() => heroCms.getImageUrl('hero', 1))
@@ -55,38 +62,70 @@ const siteSettings = useSiteSettings()
 // ── CMS: trip data (AdminTrips → cms_trips) ───────────────────────────────
 const oceanSafariTrip = useTripData('ocean-safari')
 const diveExpeditionTrip = useTripData('dive-expedition')
+const oceanSafariEscapeTrip = useTripData('ocean-safari-escape')
+const diveEscapeTrip = useTripData('dive-escape')
 
 const allTrips = computed(() => {
   const os = oceanSafariTrip.trip.value
   const de = diveExpeditionTrip.trip.value
+  const oe = oceanSafariEscapeTrip.trip.value
+  const dx = diveEscapeTrip.trip.value
   const osNights = Math.max(1, (oceanSafariTrip.durationDays.value || 6) - 1)
   const deNights = Math.max(1, (diveExpeditionTrip.durationDays.value || 9) - 1)
+  const oeNights = Math.max(1, (oceanSafariEscapeTrip.durationDays.value || 4) - 1)
+  const dxNights = Math.max(1, (diveEscapeTrip.durationDays.value || 5) - 1)
 
   return {
     'ocean-safari': {
       id: 'ocean-safari',
       name: os?.title
-        ? `${os.title} — ${os.subtitle || 'Northern Reef Expedition'}`
-        : 'Ocean Safari — Northern Reef Expedition',
+        ? `${os.title} — ${os.subtitle || 'Our Signature Ningaloo Sailing Expedition'}`
+        : 'Ocean Safari Expedition — Our Signature Ningaloo Sailing Expedition',
       duration: oceanSafariTrip.durationDays.value
         ? `${oceanSafariTrip.durationDays.value} Days / ${osNights} Nights`
         : '6 Days / 5 Nights',
       guests: oceanSafariTrip.maxGuests.value || 12,
-      price: oceanSafariTrip.priceAud.value || 2495,
-      priceLabel: oceanSafariTrip.priceLabel.value || 'From $2,495 AUD',
+      price: oceanSafariTrip.priceAud.value || 5000,
+      priceLabel: oceanSafariTrip.priceLabel.value || 'From $5,000 AUD',
       priceCurrency: 'AUD',
     },
     'dive-expedition': {
       id: 'dive-expedition',
       name: de?.title
-        ? `${de.title} — ${de.subtitle || 'Full Reef Live-Aboard'}`
-        : 'Dive Expedition — Full Reef Live-Aboard',
+        ? `${de.title} — ${de.subtitle || 'Our Flagship Liveaboard Dive Expedition'}`
+        : 'Dive Expedition — Our Flagship Liveaboard Dive Expedition',
       duration: diveExpeditionTrip.durationDays.value
         ? `${diveExpeditionTrip.durationDays.value} Days / ${deNights} Nights`
         : '9 Days / 8 Nights',
       guests: diveExpeditionTrip.maxGuests.value || 14,
-      price: diveExpeditionTrip.priceAud.value || 4495,
-      priceLabel: diveExpeditionTrip.priceLabel.value || 'From $4,495 AUD',
+      price: diveExpeditionTrip.priceAud.value || 9600,
+      priceLabel: diveExpeditionTrip.priceLabel.value || 'From $9,600 AUD',
+      priceCurrency: 'AUD',
+    },
+    'ocean-safari-escape': {
+      id: 'ocean-safari-escape',
+      name: oe?.title
+        ? `${oe.title} — ${oe.subtitle || 'A Shorter Ningaloo Sailing Escape'}`
+        : 'Ocean Safari Escape — A Shorter Ningaloo Sailing Escape',
+      duration: oceanSafariEscapeTrip.durationDays.value
+        ? `${oceanSafariEscapeTrip.durationDays.value} Days / ${oeNights} Nights`
+        : '4 Days / 3 Nights',
+      guests: oceanSafariEscapeTrip.maxGuests.value || 12,
+      price: oceanSafariEscapeTrip.priceAud.value || 3000,
+      priceLabel: oceanSafariEscapeTrip.priceLabel.value || 'From $3,000 AUD',
+      priceCurrency: 'AUD',
+    },
+    'dive-escape': {
+      id: 'dive-escape',
+      name: dx?.title
+        ? `${dx.title} — ${dx.subtitle || 'A Shorter Liveaboard Dive Escape'}`
+        : 'Dive Escape — A Shorter Liveaboard Dive Escape',
+      duration: diveEscapeTrip.durationDays.value
+        ? `${diveEscapeTrip.durationDays.value} Days / ${dxNights} Nights`
+        : '5 Days / 4 Nights',
+      guests: diveEscapeTrip.maxGuests.value || 14,
+      price: diveEscapeTrip.priceAud.value || 5200,
+      priceLabel: diveEscapeTrip.priceLabel.value || 'From $5,200 AUD',
       priceCurrency: 'AUD',
     },
   }
@@ -96,11 +135,19 @@ const allTrips = computed(() => {
 const expeditionOptions = computed(() => [
   {
     value: 'ocean-safari',
-    label: `Ocean Safari — ${allTrips.value['ocean-safari'].duration} — AUD $${allTrips.value['ocean-safari'].price.toLocaleString()} pp`,
+    label: `Ocean Safari Expedition — ${allTrips.value['ocean-safari'].duration} — AUD $${allTrips.value['ocean-safari'].price.toLocaleString()} pp`,
   },
   {
     value: 'dive-expedition',
     label: `Dive Expedition — ${allTrips.value['dive-expedition'].duration} — AUD $${allTrips.value['dive-expedition'].price.toLocaleString()} pp`,
+  },
+  {
+    value: 'ocean-safari-escape',
+    label: `Ocean Safari Escape — ${allTrips.value['ocean-safari-escape'].duration} — AUD $${allTrips.value['ocean-safari-escape'].price.toLocaleString()} pp`,
+  },
+  {
+    value: 'dive-escape',
+    label: `Dive Escape — ${allTrips.value['dive-escape'].duration} — AUD $${allTrips.value['dive-escape'].price.toLocaleString()} pp`,
   },
   { value: 'unsure', label: 'Not sure yet — happy to advise' },
 ])
@@ -115,11 +162,11 @@ const form = ref({
   name: '',
   email: '',
   phone: '',
-  expedition: preselectedTrip.value,
+  expedition: preselectedTrip.value || (route.query.expedition ? 'unsure' : ''),
   guests: '',
   dateFrom: '',
   dateTo: '',
-  message: '',
+  message: route.query.expedition ? `I'd like to enquire about the ${route.query.expedition} departing ${route.query.dates || 'the listed dates'}.` : '',
 })
 
 const submitted = ref(false)
@@ -194,6 +241,8 @@ onMounted(async () => {
     siteSettings.load(),
     oceanSafariTrip.load(),
     diveExpeditionTrip.load(),
+    oceanSafariEscapeTrip.load(),
+    diveEscapeTrip.load(),
   ])
 })
 </script>
@@ -202,11 +251,11 @@ onMounted(async () => {
   <div>
     <PageHero
       tag="Bookings & Enquiries"
-      title="Check"
+      :title="heroTitle"
       title-italic="Availability"
-      subtitle="Reach out to our team to discuss dates, pricing, and all the details for your perfect expedition."
-      image=""
-      image-alt="Expedition vessel on calm turquoise waters"
+      :subtitle="heroSubtitle"
+      fallback-image=""
+      fallback-alt="Expedition vessel on calm turquoise waters"
       height="55vh"
     >
       <template #default>

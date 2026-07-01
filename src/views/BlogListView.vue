@@ -26,10 +26,16 @@ const heroCms = useComponentCMS('BlogListView')
 const heroImage = computed(() => heroCms.getImageUrl('hero', 0))
 const heroVideo = computed(() => heroCms.getImageUrl('hero', 1))
 
+const heroTitle = ref('Expedition')
+const heroSubtitle = ref('Tales from the reef, marine conservation updates, and guides for your next adventure.')
+
 onMounted(async () => {
   blogs.value = await getBlogs()
   loading.value = false
   await heroCms.load()
+  const { getEditableContent } = await import('@/composables/usePageContent')
+  heroTitle.value = await getEditableContent('blog', 'hero', 'title', heroTitle.value)
+  heroSubtitle.value = await getEditableContent('blog', 'hero', 'subtitle', heroSubtitle.value)
 })
 
 const goToBlog = (slug: string) => {
@@ -41,11 +47,11 @@ const goToBlog = (slug: string) => {
   <div>
     <PageHero
       tag="Stories & Insights"
-      title="Expedition"
+      :title="heroTitle"
       title-italic="Journal"
-      subtitle="Tales from the reef, marine conservation updates, and guides for your next adventure."
-      image=""
-      image-alt="Ningaloo Reef blog"
+      :subtitle="heroSubtitle"
+      fallback-image=""
+      fallback-alt="Ningaloo Reef blog"
       height="50vh"
     >
       <template #default>
@@ -231,7 +237,7 @@ const goToBlog = (slug: string) => {
   align-items: center;
   gap: 4px;
   padding: 4px 8px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.55rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -292,7 +298,7 @@ const goToBlog = (slug: string) => {
 }
 
 .blog-date {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -330,7 +336,7 @@ const goToBlog = (slug: string) => {
 
 /* === Author === */
 .blog-author {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.7rem;
   color: var(--color-sand-300);
   opacity: 0.45;
@@ -351,7 +357,7 @@ const goToBlog = (slug: string) => {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.15em;

@@ -592,7 +592,7 @@ const countryCodes = [
 }
 
 .login-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 300;
   color: #c9a84c;
@@ -601,7 +601,7 @@ const countryCodes = [
 }
 
 .login-subtitle {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -629,7 +629,7 @@ const countryCodes = [
   background: transparent;
   border: none;
   color: rgba(248, 245, 239, 0.5);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -679,7 +679,7 @@ const countryCodes = [
 }
 
 .form-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -692,7 +692,7 @@ const countryCodes = [
   border: 1px solid rgba(201, 168, 76, 0.2);
   color: #f8f5ef;
   padding: 0.75rem 1rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   outline: none;
   transition: border-color 0.3s;
@@ -714,7 +714,7 @@ const countryCodes = [
   border: 1px solid rgba(201, 168, 76, 0.2);
   color: #f8f5ef;
   padding: 0.75rem 0.5rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   outline: none;
   cursor: pointer;
@@ -742,7 +742,7 @@ const countryCodes = [
   background: rgba(7, 26, 43, 0.6);
   border: 1px solid rgba(201, 168, 76, 0.2);
   color: #f8f5ef;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
@@ -767,7 +767,7 @@ const countryCodes = [
   border: none;
   color: #071a2b;
   padding: 0.875rem 1.5rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -791,7 +791,7 @@ const countryCodes = [
   border: 1px solid rgba(201, 168, 76, 0.3);
   color: #c9a84c;
   padding: 0.75rem 1.5rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -823,7 +823,7 @@ const countryCodes = [
 }
 
 .divider span {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -841,7 +841,7 @@ const countryCodes = [
   background: #fff;
   border: none;
   color: #333;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
@@ -869,7 +869,7 @@ const countryCodes = [
   border: none;
   color: #c9a84c;
   cursor: pointer;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: underline;
@@ -894,7 +894,7 @@ const countryCodes = [
   background: rgba(13, 110, 122, 0.1);
   border: 1px solid rgba(13, 110, 122, 0.2);
   color: rgba(13, 110, 122, 0.8);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   letter-spacing: 0.05em;
   line-height: 1.5;

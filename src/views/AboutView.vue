@@ -80,12 +80,13 @@ onMounted(async () => {
 <template>
   <div>
     <PageHero
+      component-name="AboutView"
       tag="Our Story"
       title="Where Passion"
       title-italic="Meets the Ocean"
       subtitle="Expedition OZ was founded by ocean lovers who refused to choose between adventure and luxury."
-      image=""
-      image-alt="Sunset over Ningaloo Reef Western Australia"
+      fallback-image=""
+      fallback-alt="Sunset over Ningaloo Reef Western Australia"
       height="60vh"
     >
       <template #default>

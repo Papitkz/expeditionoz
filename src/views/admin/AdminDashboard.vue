@@ -297,7 +297,7 @@ const quickActions = [
 }
 
 .page-title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: var(--font-display);
   font-size: 2.5rem;
   font-weight: 300;
   letter-spacing: 0.02em;
@@ -307,7 +307,7 @@ const quickActions = [
 }
 
 .page-subtitle {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.2em;
@@ -341,7 +341,7 @@ const quickActions = [
 }
 
 .section-title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: var(--font-display);
   font-size: 1.125rem;
   font-weight: 400;
   letter-spacing: 0.08em;
@@ -408,7 +408,7 @@ const quickActions = [
 }
 
 .stat-value {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 300;
   color: #c9a84c;
@@ -418,7 +418,7 @@ const quickActions = [
 }
 
 .stat-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.55rem;
   font-weight: 500;
   letter-spacing: 0.2em;
@@ -467,7 +467,7 @@ const quickActions = [
   background: rgba(10, 46, 74, 0.25);
   border: 1px solid rgba(201, 168, 76, 0.08);
   color: rgba(248, 245, 239, 0.55);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -564,7 +564,7 @@ const quickActions = [
 }
 
 .empty-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 400;
   color: rgba(248, 245, 239, 0.5);
@@ -572,7 +572,7 @@ const quickActions = [
 }
 
 .empty-desc {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.7rem;
   font-weight: 400;
   color: rgba(248, 245, 239, 0.3);
@@ -614,7 +614,7 @@ const quickActions = [
   background: rgba(201, 168, 76, 0.1);
   border: 1px solid rgba(201, 168, 76, 0.15);
   flex-shrink: 0;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 0.875rem;
   font-weight: 600;
   color: #c9a84c;
@@ -626,7 +626,7 @@ const quickActions = [
 }
 
 .booking-name {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.8rem;
   font-weight: 500;
   color: rgba(248, 245, 239, 0.9);
@@ -637,7 +637,7 @@ const quickActions = [
 }
 
 .booking-trip {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   color: rgba(248, 245, 239, 0.4);
   margin: 0.125rem 0 0 0;
@@ -655,7 +655,7 @@ const quickActions = [
 }
 
 .booking-status {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.5rem;
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -683,7 +683,7 @@ const quickActions = [
 }
 
 .booking-date {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   color: rgba(248, 245, 239, 0.3);
   letter-spacing: 0.05em;
@@ -750,7 +750,7 @@ const quickActions = [
 }
 
 .upload-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.75rem;
   font-weight: 500;
   color: rgba(248, 245, 239, 0.8);
@@ -761,7 +761,7 @@ const quickActions = [
 }
 
 .upload-date {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   color: rgba(248, 245, 239, 0.3);
   margin: 0.125rem 0 0 0;

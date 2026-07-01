@@ -38,7 +38,7 @@ defineProps<{
 }
 
 .no-image-text {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;

@@ -252,7 +252,7 @@ onMounted(loadUsers)
 }
 
 .denied-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 300;
   color: #e07b5a;
@@ -300,14 +300,14 @@ onMounted(loadUsers)
 }
 
 .stat-value {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 300;
   color: #c9a84c;
 }
 
 .stat-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.55rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -325,7 +325,7 @@ onMounted(loadUsers)
   margin-bottom: 1rem;
 }
 
-.card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: #f8f5ef; margin-bottom: 0.25rem; }
+.card-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; color: #f8f5ef; margin-bottom: 0.25rem; }
 .card-desc { font-size: 0.8rem; color: rgba(248,245,239,0.5); margin-bottom: 1.5rem; line-height: 1.6; }
 
 .card-header-row .card-desc {
@@ -346,7 +346,7 @@ onMounted(loadUsers)
   background: transparent;
   border: none;
   color: #f8f5ef;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   outline: none;
   width: 180px;
@@ -357,10 +357,10 @@ onMounted(loadUsers)
 }
 
 .grant-row { display: flex; gap: 0.75rem; }
-.form-input { flex: 1; background: rgba(7,26,43,0.6); border: 1px solid rgba(201,168,76,0.2); color: #f8f5ef; padding: 0.625rem 0.75rem; font-family: 'Inter', sans-serif; font-size: 0.8rem; outline: none; transition: border-color 0.3s; -webkit-appearance: none; }
+.form-input { flex: 1; background: rgba(7,26,43,0.6); border: 1px solid rgba(201,168,76,0.2); color: #f8f5ef; padding: 0.625rem 0.75rem; font-family: var(--font-body); font-size: 0.8rem; outline: none; transition: border-color 0.3s; -webkit-appearance: none; }
 .form-input:focus { border-color: #c9a84c; }
 
-.grant-btn { padding: 0.625rem 1.5rem; background: #c9a84c; border: 1px solid #c9a84c; color: #071a2b; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.grant-btn { padding: 0.625rem 1.5rem; background: #c9a84c; border: 1px solid #c9a84c; color: #071a2b; font-family: var(--font-heading); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
 .grant-btn:hover { background: #e8c05a; }
 
 .loading-state { padding: 2rem; text-align: center; color: rgba(248,245,239,0.4); }
@@ -372,7 +372,7 @@ onMounted(loadUsers)
 .user-row:hover { border-color: rgba(201,168,76,0.2); }
 .user-owner { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.05); }
 
-.user-row-avatar { width: 40px; height: 40px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.2); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 600; color: #c9a84c; flex-shrink: 0; }
+.user-row-avatar { width: 40px; height: 40px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 0.9rem; font-weight: 600; color: #c9a84c; flex-shrink: 0; }
 .owner-avatar { background: rgba(201,168,76,0.3); border-color: #c9a84c; box-shadow: 0 0 8px rgba(201,168,76,0.2); }
 
 .user-row-info { flex: 1; min-width: 0; }
@@ -382,14 +382,14 @@ onMounted(loadUsers)
 
 .user-row-role { flex-shrink: 0; }
 
-.role-badge { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.625rem; display: inline-block; }
+.role-badge { font-family: var(--font-heading); font-size: 0.55rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.625rem; display: inline-block; }
 .role-owner { background: rgba(201,168,76,0.25); color: #c9a84c; border: 1px solid rgba(201,168,76,0.4); }
 .role-admin { background: rgba(76,175,80,0.15); color: #4caf50; border: 1px solid rgba(76,175,80,0.3); }
 .role-user { background: rgba(248,245,239,0.05); color: rgba(248,245,239,0.4); border: 1px solid rgba(248,245,239,0.1); }
 
 .user-row-actions { flex-shrink: 0; }
 
-.action-btn { padding: 0.375rem 0.75rem; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: 1px solid; transition: all 0.2s; }
+.action-btn { padding: 0.375rem 0.75rem; font-family: var(--font-heading); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: 1px solid; transition: all 0.2s; }
 .promote-btn { background: rgba(76,175,80,0.1); border-color: rgba(76,175,80,0.3); color: #4caf50; }
 .promote-btn:hover { background: rgba(76,175,80,0.2); }
 .revoke-btn { background: rgba(224,123,90,0.1); border-color: rgba(224,123,90,0.3); color: #e07b5a; }

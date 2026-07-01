@@ -64,11 +64,31 @@ const COMPONENT_REGISTRY: ComponentDef[] = [
     sections: [
       { section: 'tourCards', label: 'Tour Cards', slots: [
         { slotIndex: 0, label: 'Dive Expedition Card', defaultMediaType: 'image' },
-        { slotIndex: 1, label: 'Ocean Safari Card', defaultMediaType: 'image' },
+        { slotIndex: 1, label: 'Ocean Safari Expedition Card', defaultMediaType: 'image' },
+        { slotIndex: 2, label: 'Ocean Safari Escape Card', defaultMediaType: 'image' },
       ]},
     ],
   },
 
+  {
+    component: 'SpecialtyExpeditionsSection',
+    label: 'Limited Expeditions — Card Images',
+    file: 'src/views/LimitedExpeditionsView.vue',
+    sections: [
+      { section: 'specialtyCards', label: 'Specialty Cards', slots: [
+        { slotIndex: 0, label: 'Freediving Expedition Card', defaultMediaType: 'image' },
+        { slotIndex: 1, label: 'Surf Expedition Card', defaultMediaType: 'image' },
+        { slotIndex: 2, label: 'Whale Song Expedition Card', defaultMediaType: 'image' },
+        { slotIndex: 3, label: 'Underwater Photography Expedition Card', defaultMediaType: 'image' },
+        { slotIndex: 4, label: 'Black Water Expedition Card', defaultMediaType: 'image' },
+        { slotIndex: 5, label: 'Wellness at Sea Card', defaultMediaType: 'image' },
+        { slotIndex: 6, label: 'Sharks of Ningaloo Card', defaultMediaType: 'image' },
+        { slotIndex: 7, label: 'Citizen Science Expedition Card', defaultMediaType: 'image' },
+      ]},
+    ],
+  },
+  // NOTE: LimitedExpeditionDetail images are now managed directly in
+  // AdminLimitedExpeditions.vue with built-in file upload per trip.
   {
     component: 'ExperienceSection',
     label: 'Home — Ningaloo Route Map',
@@ -79,7 +99,17 @@ const COMPONENT_REGISTRY: ComponentDef[] = [
       ]},
     ],
   },
-    {
+  //   {
+  //   component: 'InclusionsSection',
+  //   label: 'Home — Private & Hosted Expeditions / Closer to Nature',
+  //   file: 'src/components/home/InclusionsSection.vue',
+  //   sections: [
+  //     { section: 'charterBanner', label: 'Private Charter Banner', slots: [
+  //       { slotIndex: 0, label: 'Banner Photo (guests on deck)', defaultMediaType: 'image' },
+  //     ]},
+  //   ],
+  // },
+   {
     component: 'InclusionsSection',
     label: 'Home — Inclusions (Curated by the Ocean)',
     file: 'src/components/home/InclusionsSection.vue',
@@ -87,11 +117,11 @@ const COMPONENT_REGISTRY: ComponentDef[] = [
       { section: 'experienceCards', label: 'Experience Cards', slots: [
         { slotIndex: 0, label: 'Manta Ray Encounters', defaultMediaType: 'image' },
         { slotIndex: 1, label: 'Whale Watching', defaultMediaType: 'image' },
-        { slotIndex: 2, label: 'Freediving', defaultMediaType: 'image' },
+        { slotIndex: 2, label: 'Reef Snokelling', defaultMediaType: 'image' },
         { slotIndex: 3, label: 'Remote Beach Exploration', defaultMediaType: 'image' },
         { slotIndex: 4, label: 'Kayaking Yardie Creek', defaultMediaType: 'image' },
         { slotIndex: 5, label: 'Yoga & Breathwork', defaultMediaType: 'image' },
-        { slotIndex: 6, label: 'Sunset Dinners', defaultMediaType: 'image' },
+        { slotIndex: 6, label: 'Sunset Sailing', defaultMediaType: 'image' },
         { slotIndex: 7, label: 'Expedition RIB Adventures', defaultMediaType: 'image' },
       ]},
       { section: 'natureBg', label: 'Nature Box Background', slots: [
@@ -99,7 +129,6 @@ const COMPONENT_REGISTRY: ComponentDef[] = [
       ]},
     ],
   },
-  
   {
     component: 'CtaSection',
     label: 'Home — CTA Background',
@@ -125,6 +154,32 @@ const COMPONENT_REGISTRY: ComponentDef[] = [
     ],
   },
   {
+    component: 'ExperienceView',
+    label: 'The Experience Page',
+    file: 'src/views/ExperienceView.vue',
+    sections: [
+      { section: 'hero', label: 'Hero', slots: [
+        { slotIndex: 0, label: 'Hero Image', defaultMediaType: 'image' },
+      ]},
+      { section: 'rhythm', label: 'A Day Aboard — Dawn / Midday / Dusk', slots: [
+        { slotIndex: 0, label: 'Dawn', defaultMediaType: 'image' },
+        { slotIndex: 1, label: 'Midday', defaultMediaType: 'image' },
+        { slotIndex: 2, label: 'Dusk', defaultMediaType: 'image' },
+      ]},
+      { section: 'gallery', label: 'Atmosphere Gallery', slots: [
+        { slotIndex: 0, label: 'Gallery 1', defaultMediaType: 'image' },
+        { slotIndex: 1, label: 'Gallery 2', defaultMediaType: 'image' },
+        { slotIndex: 2, label: 'Gallery 3', defaultMediaType: 'image' },
+        { slotIndex: 3, label: 'Gallery 4', defaultMediaType: 'image' },
+        { slotIndex: 4, label: 'Gallery 5', defaultMediaType: 'image' },
+        { slotIndex: 5, label: 'Gallery 6', defaultMediaType: 'image' },
+      ]},
+      { section: 'pillars', label: 'Pillars Background', slots: [
+        { slotIndex: 0, label: 'Background Image', defaultMediaType: 'image' },
+      ]},
+    ],
+  },
+  {
     component: 'ExpeditionsView',
     label: 'Expeditions Page',
     file: 'src/views/ExpeditionsView.vue',
@@ -133,8 +188,9 @@ const COMPONENT_REGISTRY: ComponentDef[] = [
         { slotIndex: 0, label: 'Hero Image', defaultMediaType: 'image' },
       ]},
       { section: 'hoverImages', label: 'Hover Preview Images', slots: [
-        { slotIndex: 0, label: 'Ocean Safari Hover', defaultMediaType: 'image' },
+        { slotIndex: 0, label: 'Ocean Safari Expedition Hover', defaultMediaType: 'image' },
         { slotIndex: 1, label: 'Dive Expedition Hover', defaultMediaType: 'image' },
+        { slotIndex: 2, label: 'Ocean Safari Escape Hover', defaultMediaType: 'image' },
       ]},
     ],
   },
@@ -220,6 +276,43 @@ const COMPONENT_REGISTRY: ComponentDef[] = [
         { slotIndex: 6, label: 'Day 7', defaultMediaType: 'image' },
         { slotIndex: 7, label: 'Day 8', defaultMediaType: 'image' },
         { slotIndex: 8, label: 'Day 9', defaultMediaType: 'image' },
+      ]},
+      { section: 'routeMap', label: 'Route Map Background', slots: [
+        { slotIndex: 0, label: 'Route Map BG', defaultMediaType: 'image' },
+      ]},
+    ],
+  },
+  {
+    component: 'OceanSafariEscapeView',
+    label: 'Ocean Safari Escape Page',
+    file: 'src/views/OceanSafariEscapeView.vue',
+    sections: [
+      { section: 'hero', label: 'Hero', slots: [
+        { slotIndex: 0, label: 'Hero Video', defaultMediaType: 'video' },
+        { slotIndex: 1, label: 'Hero Poster', defaultMediaType: 'image' },
+      ]},
+      { section: 'about', label: 'About Section', slots: [
+        { slotIndex: 0, label: 'About Image', defaultMediaType: 'image' },
+      ]},
+      { section: 'vesselGallery', label: 'Vessel Gallery', slots: [
+        { slotIndex: 0, label: 'Gallery 1', defaultMediaType: 'image' },
+        { slotIndex: 1, label: 'Gallery 2', defaultMediaType: 'image' },
+        { slotIndex: 2, label: 'Gallery 3', defaultMediaType: 'image' },
+        { slotIndex: 3, label: 'Gallery 4', defaultMediaType: 'image' },
+        { slotIndex: 4, label: 'Gallery 5', defaultMediaType: 'image' },
+        { slotIndex: 5, label: 'Gallery 6', defaultMediaType: 'image' },
+      ]},
+      { section: 'diningGallery', label: 'Dining Gallery', slots: [
+        { slotIndex: 0, label: 'Dining 1', defaultMediaType: 'image' },
+        { slotIndex: 1, label: 'Dining 2', defaultMediaType: 'image' },
+        { slotIndex: 2, label: 'Dining 3', defaultMediaType: 'image' },
+        { slotIndex: 3, label: 'Dining 4', defaultMediaType: 'image' },
+      ]},
+      { section: 'itinerary', label: 'Itinerary', slots: [
+        { slotIndex: 0, label: 'Day 1', defaultMediaType: 'image' },
+        { slotIndex: 1, label: 'Day 2', defaultMediaType: 'image' },
+        { slotIndex: 2, label: 'Day 3', defaultMediaType: 'image' },
+        { slotIndex: 3, label: 'Day 4', defaultMediaType: 'image' },
       ]},
       { section: 'routeMap', label: 'Route Map Background', slots: [
         { slotIndex: 0, label: 'Route Map BG', defaultMediaType: 'image' },
@@ -359,7 +452,6 @@ interface SlotItem {
 // Build slot items by merging registry + CMS data + staged state
 const slotItems = computed((): SlotItem[] => {
   if (!activeComponentDef.value || !activeSectionDef.value) return []
-
   return activeSectionDef.value.slots.map((slot) => {
     const cmsItem = allItems.value.find(
       (i) =>
@@ -416,6 +508,29 @@ const filteredComponents = computed(() => {
 
 function getComponentImageCount(component: string): number {
   return allItems.value.filter((i) => i.component === component && i.imageUrl).length
+}
+
+// --- Sidebar section grouping (e.g. group all "Freediving — ..." sections under one
+// "Freediving" header so a component with many expeditions/pages isn't one long flat list) ---
+function sectionGroupLabel(label: string): string {
+  const idx = label.indexOf(' — ')
+  return idx === -1 ? '' : label.slice(0, idx)
+}
+
+function sectionDisplayLabel(label: string): string {
+  const idx = label.indexOf(' — ')
+  return idx === -1 ? label : label.slice(idx + 3)
+}
+
+function componentHasGroups(comp: ComponentDef): boolean {
+  const groups = new Set(comp.sections.map((s) => sectionGroupLabel(s.label)).filter(Boolean))
+  return groups.size > 1
+}
+
+function shouldShowGroupHeader(comp: ComponentDef, idx: number): boolean {
+  if (!componentHasGroups(comp)) return false
+  const groups = comp.sections.map((s) => sectionGroupLabel(s.label))
+  return idx === 0 || groups[idx] !== groups[idx - 1]
 }
 
 function getComponentTotalSlots(component: string): number {
@@ -495,7 +610,6 @@ async function moveSlot(slot: SlotItem, direction: 'up' | 'down') {
 
   const swapIdx = direction === 'up' ? idx - 1 : idx + 1
   if (swapIdx < 0 || swapIdx >= siblings.length) return
-
   const sibling = siblings[swapIdx]
 
   const updates: { id: string; slotIndex: number; component: string }[] = []
@@ -616,16 +730,19 @@ onMounted(() => {
             </button>
 
             <div v-if="activeComponent === comp.component" class="section-list">
-              <button
-                v-for="sec in comp.sections"
-                :key="sec.section"
-                class="section-btn"
-                :class="{ active: activeSection === sec.section }"
-                @click="activeSection = sec.section"
-              >
-                <span class="section-label">{{ sec.label }}</span>
-                <span class="section-badge">{{ sec.slots.length }}</span>
-              </button>
+              <template v-for="(sec, idx) in comp.sections" :key="sec.section">
+                <div v-if="shouldShowGroupHeader(comp, idx)" class="section-group-header">
+                  {{ sectionGroupLabel(sec.label) }}
+                </div>
+                <button
+                  class="section-btn"
+                  :class="{ active: activeSection === sec.section, grouped: componentHasGroups(comp) }"
+                  @click="activeSection = sec.section"
+                >
+                  <span class="section-label">{{ sectionDisplayLabel(sec.label) }}</span>
+                  <span class="section-badge">{{ sec.slots.length }}</span>
+                </button>
+              </template>
             </div>
           </div>
         </div>
@@ -936,7 +1053,7 @@ onMounted(() => {
 }
 
 .header-tag {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -945,7 +1062,7 @@ onMounted(() => {
 }
 
 .admin-title {
-  font-family: var(--font-display, 'Cormorant Garamond', serif);
+  font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 300;
   color: var(--color-sand-100, #f8f5ef);
@@ -969,20 +1086,20 @@ onMounted(() => {
 /* === Layout === */
 .cms-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 320px minmax(0, 1fr);
   gap: 1.5rem;
   align-items: start;
 }
 
 /* === Sidebar === */
 .component-sidebar {
-  background: rgba(10, 46, 74, 0.3);
-  border: 1px solid rgba(201, 168, 76, 0.08);
-  padding: 1rem;
   position: sticky;
   top: 2rem;
   max-height: calc(100vh - 4rem);
   overflow-y: auto;
+  background: rgba(10, 46, 74, 0.3);
+  border: 1px solid rgba(201, 168, 76, 0.08);
+  padding: 1rem;
 }
 
 .search-box {
@@ -1006,7 +1123,7 @@ onMounted(() => {
   padding: 0.625rem 0.75rem 0.625rem 2.25rem;
   background: rgba(7, 26, 43, 0.5);
   border: 1px solid rgba(201, 168, 76, 0.1);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--color-sand-100, #f8f5ef);
   outline: none;
@@ -1064,7 +1181,7 @@ onMounted(() => {
 }
 
 .component-name {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -1098,7 +1215,7 @@ onMounted(() => {
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: left;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.7rem;
 }
 
@@ -1109,6 +1226,26 @@ onMounted(() => {
 .section-btn.active {
   color: var(--color-gold-400, #c9a84c);
   background: rgba(201, 168, 76, 0.08);
+}
+
+.section-btn.grouped {
+  padding-left: 1.1rem;
+}
+
+.section-group-header {
+  font-family: var(--font-heading);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-400, #c9a84c);
+  opacity: 0.75;
+  padding: 0.55rem 0.625rem 0.15rem;
+  margin-top: 0.15rem;
+}
+
+.section-group-header:first-child {
+  margin-top: 0;
 }
 
 .section-label {
@@ -1125,6 +1262,7 @@ onMounted(() => {
 
 /* === Main Content === */
 .slot-main {
+  min-width: 0;
   min-height: 600px;
 }
 
@@ -1139,7 +1277,7 @@ onMounted(() => {
 }
 
 .section-title {
-  font-family: var(--font-display, 'Cormorant Garamond', serif);
+  font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 300;
   color: var(--color-sand-100, #f8f5ef);
@@ -1163,7 +1301,7 @@ onMounted(() => {
   background: rgba(10, 46, 74, 0.5);
   border: 1px solid rgba(201, 168, 76, 0.15);
   color: var(--color-sand-200, rgba(248, 245, 239, 0.6));
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1241,7 +1379,7 @@ onMounted(() => {
   border-radius: 50%;
   background: rgba(201, 168, 76, 0.15);
   border: 1px solid rgba(201, 168, 76, 0.35);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.55rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -1255,7 +1393,7 @@ onMounted(() => {
 }
 
 .slot-purpose-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -1267,7 +1405,12 @@ onMounted(() => {
 }
 
 .slot-purpose-path {
-  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.15rem;
+  font-family: var(--font-heading);
   font-size: 0.58rem;
   font-weight: 500;
   letter-spacing: 0.03em;
@@ -1275,7 +1418,6 @@ onMounted(() => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 0.1rem;
 }
 
 .slot-type-tag {
@@ -1285,7 +1427,7 @@ onMounted(() => {
   gap: 0.3rem;
   padding: 0.2rem 0.5rem;
   border-radius: 2px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.55rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1343,7 +1485,7 @@ onMounted(() => {
 }
 
 .preview-placeholder span {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -1359,7 +1501,7 @@ onMounted(() => {
 
 .media-badge,
 .status-badge {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.5rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -1414,7 +1556,7 @@ onMounted(() => {
 
 .form-label {
   display: block;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.55rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -1430,7 +1572,7 @@ onMounted(() => {
   padding: 0.5rem 0.625rem;
   background: rgba(7, 26, 43, 0.5);
   border: 1px solid rgba(201, 168, 76, 0.1);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--color-sand-100, #f8f5ef);
   outline: none;
@@ -1484,7 +1626,7 @@ onMounted(() => {
 .btn-remove,
 .btn-reorder {
   padding: 0.4rem 0.625rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -1621,6 +1763,7 @@ onMounted(() => {
 
   .component-sidebar {
     position: static;
+    top: auto;
     max-height: none;
   }
 }
@@ -1711,15 +1854,6 @@ onMounted(() => {
 .slot-breadcrumb {
   color: rgba(201, 168, 76, 0.45);
   font-size: 0.54rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
 }
-
-.slot-purpose-path {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  margin-top: 0.15rem;
-}
-
 </style>

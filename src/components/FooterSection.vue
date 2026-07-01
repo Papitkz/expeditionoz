@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 const currentYear = new Date().getFullYear()
 
 const expeditionLinks = [
-  { label: 'Dive Expedition', to: '/expeditions/dive' },
-  { label: 'Ocean Safari', to: '/expeditions/ocean-safari' },
-  { label: 'Special Expeditions', to: '/expeditions/special' },
-  { label: 'Upcoming Dates', to: '/expeditions/dates' },
-  { label: 'Inclusions', to: '/expeditions/inclusions' },
+  { label: 'Ocean Safari Expedition', to: '/expeditions/ocean-safari' },
+  { label: 'Ocean Safari Escape', to: '/expeditions/ocean-safari-escape' },
+  { label: 'Dive Expedition', to: '/expeditions/dive-expedition' },
+  { label: 'Dive Escape', to: '/expeditions/dive-escape' },
+  { label: 'Limited Expeditions', to: '/limited-expeditions' },
   { label: 'FAQ', to: '/faq' },
 ]
 
@@ -29,6 +31,19 @@ const contactLinks = [
   { label: 'Booking Enquiry', to: '/book' },
   { label: 'Get In Touch', to: '/contact' },
 ]
+
+const emailInput = ref('')
+const joinStatus = ref<'idle' | 'success' | 'error'>('idle')
+
+function handleJoin() {
+  if (!emailInput.value || !emailInput.value.includes('@')) {
+    joinStatus.value = 'error'
+    return
+  }
+  // TODO: wire up to real newsletter service
+  joinStatus.value = 'success'
+  emailInput.value = ''
+}
 </script>
 
 <template>
@@ -47,7 +62,7 @@ const contactLinks = [
           <p class="brand-tagline">
             All inclusive small group expeditions exploring Ningaloo Reef by sail.
           </p>
-          <div class="social-row ">
+          <div class="social-row">
             <a href="https://www.instagram.com/ExpeditionOz/" class="social-btn" aria-label="Instagram">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -74,7 +89,7 @@ const contactLinks = [
 
         <!-- Link Matrix Container -->
         <div class="footer-links-matrix">
-          
+
           <!-- Expeditions Column -->
           <div class="nav-col expeditions-panel">
             <h4 class="nav-col-heading">EXPEDITIONS</h4>
@@ -116,9 +131,32 @@ const contactLinks = [
               </ul>
               <div class="contact-details">
                 <a href="mailto:info@expeditionoz.com.au" class="nav-link contact-item">info@expeditionoz.com.au</a>
-                <a href="tel:+61812345678" class="nav-link contact-item">+61 8 1234 5678</a>
+                <a href="tel:+61812345678" class="nav-link contact-item"></a>
               </div>
             </div>
+          </div>
+
+          <!-- Newsletter Divider -->
+          <div class="newsletter-divider" aria-hidden="true"></div>
+
+          <!-- Stay In The Loop -->
+          <div class="nav-col newsletter-panel">
+            <h4 class="nav-col-heading newsletter-heading">STAY IN THE LOOP</h4>
+            <p class="newsletter-desc">
+              Be the first to hear about new departures, special offers and ocean stories.
+            </p>
+            <div class="newsletter-form">
+              <input
+                v-model="emailInput"
+                type="email"
+                class="newsletter-input"
+                placeholder="Enter your email"
+                @keydown.enter="handleJoin"
+              />
+              <button class="newsletter-btn" @click="handleJoin">JOIN</button>
+            </div>
+            <p v-if="joinStatus === 'success'" class="newsletter-feedback success">You're in! We'll be in touch.</p>
+            <p v-if="joinStatus === 'error'" class="newsletter-feedback error">Please enter a valid email.</p>
           </div>
 
         </div>
@@ -127,11 +165,11 @@ const contactLinks = [
 
       <!-- Bottom Bar -->
       <div class="footer-bottom">
-        <p class="bottom-copy">&copy; {{ currentYear }} Expedition OZ</p>
+        <p class="bottom-copy">&copy; {{ currentYear }} Expedition OZ. All rights reserved.</p>
         <div class="bottom-links">
-          <a href="#" class="bottom-link">Privacy Policy</a>
-          <span class="bottom-sep" aria-hidden="true">|</span>
           <a href="#" class="bottom-link">Terms &amp; Conditions</a>
+          <a href="#" class="bottom-link">Privacy Policy</a>
+          <a href="#" class="bottom-link">Booking Conditions</a>
         </div>
       </div>
 
@@ -162,6 +200,7 @@ const contactLinks = [
   display: flex;
   flex: 1;
   gap: 0;
+  align-items: flex-start;
 }
 
 /* ── Brand column ── */
@@ -223,11 +262,20 @@ const contactLinks = [
   border-color: rgba(232, 228, 220, 0.6);
 }
 
-/* ── Vertical divider ── */
+/* ── Vertical divider (brand | nav) ── */
 .brand-divider {
   width: 1px;
   background: rgba(232, 228, 220, 0.12);
   margin: 0 44px 20px 44px;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+/* ── Vertical divider (nav | newsletter) ── */
+.newsletter-divider {
+  width: 1px;
+  background: rgba(232, 228, 220, 0.12);
+  margin: 0 36px;
   align-self: stretch;
   flex-shrink: 0;
 }
@@ -276,6 +324,74 @@ const contactLinks = [
   display: block;
 }
 
+/* ── Newsletter panel ── */
+.newsletter-panel {
+  flex: 0 0 220px;
+}
+
+.newsletter-heading {
+  color: #dbb86a;
+}
+
+.newsletter-desc {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: rgba(232, 228, 220, 0.55);
+  margin-bottom: 14px;
+}
+
+.newsletter-form {
+  display: flex;
+}
+
+.newsletter-input {
+  flex: 1;
+  background: rgba(232, 228, 220, 0.07);
+  border: 1px solid rgba(232, 228, 220, 0.2);
+  border-right: none;
+  color: #e8e4dc;
+  font-size: 0.78rem;
+  padding: 9px 12px;
+  outline: none;
+  font-family: var(--font-body, serif);
+  transition: border-color 0.2s;
+  min-width: 0;
+}
+
+.newsletter-input::placeholder {
+  color: rgba(232, 228, 220, 0.3);
+}
+
+.newsletter-input:focus {
+  border-color: rgba(232, 228, 220, 0.45);
+}
+
+.newsletter-btn {
+  background: #dbb86a;
+  color: #0b1a28;
+  border: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 9px 14px;
+  cursor: pointer;
+  font-family: var(--font-heading, sans-serif);
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.newsletter-btn:hover {
+  background: #e8ca82;
+}
+
+.newsletter-feedback {
+  font-size: 0.75rem;
+  margin-top: 8px;
+}
+
+.newsletter-feedback.success { color: #7fc9a0; }
+.newsletter-feedback.error   { color: #e07070; }
+
 /* ── Bottom bar ── */
 .footer-bottom {
   margin-top: 48px;
@@ -297,12 +413,7 @@ const contactLinks = [
 .bottom-links {
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-
-.bottom-sep {
-  color: rgba(232, 228, 220, 0.25);
-  font-size: 0.75rem;
+  gap: 20px;
 }
 
 .bottom-link {
@@ -343,8 +454,22 @@ const contactLinks = [
     display: none;
   }
 
+  .newsletter-divider {
+    display: none;
+  }
+
   .nav-col {
     flex: 1 1 140px;
+  }
+
+  .newsletter-panel {
+    flex: 0 0 100%;
+    border-top: 1px solid rgba(232, 228, 220, 0.1);
+    padding-top: 24px;
+  }
+
+  .newsletter-form {
+    max-width: 360px;
   }
 }
 
@@ -380,22 +505,18 @@ const contactLinks = [
     max-width: 290px;
   }
 
-  .brand-divider {
+  .brand-divider,
+  .newsletter-divider {
     display: none;
   }
 
-  /* 
-    2-COLUMN ORDERED MATRIX GRID
-    Maps explicit named grid template areas to keep pairs aligned cleanly:
-    Row 1: Expeditions | Journal
-    Row 2: About       | Contact
-  */
   .footer-links-matrix {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-areas: 
+    grid-template-areas:
       "expeditions journal"
-      "about contact";
+      "about contact"
+      "newsletter newsletter";
     width: 100%;
     gap: 24px 16px;
     border-top: 1px solid rgba(232, 228, 220, 0.08);
@@ -406,6 +527,12 @@ const contactLinks = [
   .journal-panel     { grid-area: journal; }
   .about-panel       { grid-area: about; }
   .contact-panel     { grid-area: contact; }
+  .newsletter-panel  {
+    grid-area: newsletter;
+    flex: unset;
+    border-top: 1px solid rgba(232, 228, 220, 0.08);
+    padding-top: 20px;
+  }
 
   .nav-col {
     text-align: left;

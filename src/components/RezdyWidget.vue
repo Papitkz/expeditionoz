@@ -244,7 +244,7 @@ const tours = {
 <style scoped>
 /* ── Base ─────────────────────────────────────────────────────────────────── */
 .rezdy-widget {
-  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  font-family: var(--font-body);
 }
 
 /* ── Two-card grid ────────────────────────────────────────────────────────── */
@@ -311,7 +311,7 @@ const tours = {
 .tour-card.dive-expedition .card-location { color: #0d6e7a; }
 
 .card-title {
-  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-family: var(--font-display);
   font-size: 1.85rem;
   font-weight: 300;
   color: var(--color-sand-100, #f8f5ef);
@@ -466,7 +466,7 @@ const tours = {
 }
 
 .modal-title {
-  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 300;
   color: #f8f5ef;

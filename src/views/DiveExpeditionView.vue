@@ -27,34 +27,50 @@ const heroMedia = computed(() => {
   }
 })
 
-// About images
+// About images — fixed 4 slots (slotIndex 0-3); use getSlot() to prevent drift.
+// Matches AdminImages: DiveExpeditionView / about slots 0-3.
+const ABOUT_SLOTS = 4
 const aboutImages = computed(() =>
-  cms.getSection('about').map((item) => ({
-    src: item.imageUrl || '',
-    alt: item.alt || '',
-    caption: item.caption || item.title || '',
-    hasImage: !!item.imageUrl,
-  }))
+  Array.from({ length: ABOUT_SLOTS }, (_, i) => {
+    const item = cms.getSlot('about', i)
+    return {
+      src: item?.imageUrl || '',
+      alt: item?.alt || '',
+      caption: item?.caption || item?.title || '',
+      hasImage: !!item?.imageUrl,
+    }
+  }).filter((img) => img.hasImage)
 )
 
-// Vessel gallery
+// Vessel gallery — fixed 8 slots (slotIndex 0-7); use getSlot() to prevent drift.
+// Matches AdminImages: DiveExpeditionView / vesselGallery slots 0-7.
+const VESSEL_GALLERY_SLOTS = 8
 const vesselImages = computed(() =>
-  cms.getSection('vesselGallery').map((item) => ({
-    src: item.imageUrl || '',
-    caption: item.caption || item.title || '',
-    category: item.category || '',
-    hasImage: !!item.imageUrl,
-  }))
+  Array.from({ length: VESSEL_GALLERY_SLOTS }, (_, i) => {
+    const item = cms.getSlot('vesselGallery', i)
+    return {
+      src: item?.imageUrl || '',
+      caption: item?.caption || item?.title || '',
+      category: item?.category || '',
+      hasImage: !!item?.imageUrl,
+    }
+  }).filter((img) => img.hasImage)
 )
 
-// Dining gallery
+// Dining gallery — fixed 6 slots; use getSlot() to prevent drift.
+// Matches AdminImages: DiveExpeditionView / diningGallery slots 0-5.
+const DINING_GALLERY_SLOTS = 6
 const diningImages = computed(() =>
-  cms.getSection('diningGallery').map((item) => ({
-    src: item.imageUrl || '',
-    title: item.title || '',
-    desc: item.description || '',
-    hasImage: !!item.imageUrl,
-  }))
+  Array.from({ length: DINING_GALLERY_SLOTS }, (_, i) => {
+    const item = cms.getSlot('diningGallery', i)
+    return {
+      src: item?.imageUrl || '',
+      title: item?.title || '',
+      desc: item?.description || '',
+      hasImage: !!item?.imageUrl,
+      featured: i === 0,
+    }
+  }).filter((img) => img.hasImage)
 )
 
 // Fallback itinerary data for 9-day Dive Expedition
@@ -122,29 +138,23 @@ const fallbackItinerary: ItineraryItem[] = [
   },
 ]
 
-// Itinerary — CMS or fallback
-const itinerary = computed(() => {
-  const cmsData = cms.getSection('itinerary')
-  // Ensure CMS data has the ItineraryItem shape; fallback if empty
-  const source: ItineraryItem[] = cmsData.length > 0 
-    ? cmsData.map((item: any) => ({
-        day: item.day || '',
-        title: item.title || '',
-        description: item.description || '',
-        imageUrl: item.imageUrl || '',
-      }))
-    : fallbackItinerary
-  return source.map((item, i) => ({
-    day: item.day || `Day ${i + 1}`,
-    title: item.title || `Day ${i + 1}`,
-    desc: item.description || '',
-    image: item.imageUrl || '',
-    thumb: item.imageUrl || '',
-    hasImage: !!item.imageUrl,
-    last: i === 6,
-  }))
-})
-
+// Itinerary — fixed 9 slots; use getSlot() per index to prevent day-image drift.
+// Matches AdminImages: DiveExpeditionView / itinerary slots 0-8.
+const ITINERARY_SLOTS = 9
+const itinerary = computed(() =>
+  Array.from({ length: ITINERARY_SLOTS }, (_, i) => {
+    const cmsItem = cms.getSlot('itinerary', i)
+    const fb = (fallbackItinerary as any[])[i]
+    return {
+      day: fb?.day || `Day ${i + 1}`,
+      title: cmsItem?.title || fb?.title || `Day ${i + 1}`,
+      desc: cmsItem?.description || fb?.description || '',
+      image: cmsItem?.imageUrl || fb?.imageUrl || '',
+      thumb: cmsItem?.imageUrl || fb?.imageUrl || '',
+      hasImage: !!(cmsItem?.imageUrl || fb?.imageUrl),
+    }
+  })
+)
 const openLightbox = (index: number) => {
   currentImage.value = index
   lightboxOpen.value = true
@@ -175,15 +185,15 @@ onMounted(async () => {
 })
 
 useSEO({
-  title: 'Dive Expedition – 9-Day Full-Reef Live-Aboard',
-  description: 'Dive Expedition: 9-day live-aboard covering the full length of Ningaloo Marine Park. Maximum 14 guests. Whale shark swims, manta ray dives, humpback encounters, and remote reef sites. From $4,495 AUD. Departing Exmouth, WA.',
+  title: 'Dive Expedition – 8-Night Ningaloo Liveaboard',
+  description: 'Dive Expedition: our flagship 8-night liveaboard aboard Millennium covering the remote reaches of Ningaloo Reef. Maximum 14 guests. Scuba diving, seasonal whale shark and humpback encounters. From $9,600 AUD. Departing Exmouth, WA.',
   path: '/expeditions/dive-expedition',
   type: 'product',
   jsonLd: {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "Dive Expedition — 9-Day Ningaloo Reef Live-Aboard",
-    "description": "Flagship 9-day live-aboard expedition aboard the Dive Expedition",
+    "name": "Dive Expedition — 8-Night Ningaloo Reef Liveaboard",
+    "description": "Our flagship liveaboard expedition aboard Millennium",
     "image": "https://expeditionoz.netlify.app/images/dive-expedition-hero.jpg",
     "brand": {
       "@type": "Brand",
@@ -192,10 +202,10 @@ useSEO({
     "url": "https://expeditionoz.netlify.app/expeditions/dive-expedition",
     "offers": {
       "@type": "Offer",
-      "price": "3995.00",
+      "price": "9600.00",
       "priceCurrency": "AUD",
       "availability": "https://schema.org/InStock",
-      "priceValidUntil": "2026-12-31",
+      "priceValidUntil": "2027-10-15",
       "url": "https://expeditionoz.netlify.app/expeditions/dive-expedition",
       "shippingDetails": {
         "@type": "OfferShippingDetails",

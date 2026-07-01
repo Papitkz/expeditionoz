@@ -29,9 +29,9 @@
   --color-bg-card: rgba(10, 46, 74, 0.3);
   --color-border: rgba(201, 168, 76, 0.2);
 
-  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
   --font-heading: 'Montserrat', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --font-body: 'Montserrat', system-ui, sans-serif;
 }
 
 /* ===== Light Theme ===== */
@@ -288,6 +288,22 @@ html, body {
   html {
     scroll-behavior: auto;
   }
+
+  /* Disable all parallax transforms gracefully */
+  .page-hero__img,
+  .terrain-img,
+  .charter-parallax-img,
+  .video-fade-in {
+    transform: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  /* Disable page-level transitions */
+  .page-fade-enter-active,
+  .page-fade-leave-active {
+    transition: none !important;
+  }
 }
 
 /* styles/waves.css */
@@ -435,5 +451,85 @@ section, .section-hero, .section-light, .section-teal {
 @media (prefers-reduced-motion: reduce) {
   html.lenis {
     scroll-behavior: auto !important;
+  }
+}
+
+/* ===== Gold Compass Cursor: hide native cursor while active ===== */
+html.gold-compass-cursor-active,
+html.gold-compass-cursor-active body,
+html.gold-compass-cursor-active a,
+html.gold-compass-cursor-active button,
+html.gold-compass-cursor-active input,
+html.gold-compass-cursor-active textarea,
+html.gold-compass-cursor-active select,
+html.gold-compass-cursor-active [role="button"] {
+  cursor: none !important;
+}
+
+/* ===== Global smoothing: consistent, calmer easing on interactive elements ===== */
+a,
+button,
+.v-btn,
+.card,
+.expedition-card,
+[class*="-card"],
+[class*="-btn"] {
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+}
+
+/* ===== Global Mobile Responsiveness Baseline ===== */
+html, body {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img, video, svg, picture {
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  h1, .h1 { font-size: clamp(1.8rem, 6vw, 2.5rem) !important; }
+  h2, .h2 { font-size: clamp(1.5rem, 5vw, 2rem) !important; }
+  h3, .h3 { font-size: clamp(1.2rem, 4vw, 1.6rem) !important; }
+
+  .container, .page-container, .section-container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* Prevent any fixed-width grids/flex rows from overflowing on small screens */
+  [class*="grid-cols-2"],
+  [class*="grid-cols-3"],
+  [class*="grid-cols-4"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container, .page-container, .section-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* Disable hover-only transform effects on touch devices to avoid sticky-hover glitches */
+@media (hover: none) and (pointer: coarse) {
+  *:hover {
+    transform: none !important;
   }
 }

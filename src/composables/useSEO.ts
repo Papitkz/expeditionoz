@@ -22,14 +22,16 @@ const SITE_URL = 'https://expeditionoz.netlify.app'
 const DEFAULT_IMAGE = `${SITE_URL}/og-default.jpg`
 
 const DEFAULT_DESCRIPTIONS: Record<string, string> = {
-  '/': 'Live-aboard expeditions through Ningaloo Reef, Western Australia. Swim with whale sharks, dive remote sites, and spend your nights anchored over some of the most intact coral in the world. Ocean Safari (6 days, from $2,495 AUD) and Dive Expedition (9 days, from $4,495 AUD). 2026 season open.',
-  '/expeditions': 'Two live-aboard expeditions into Ningaloo Reef — Ocean Safari covers the northern reef in 6 days, Dive Expedition covers the full reef in 9. Both depart Exmouth, Western Australia. Small groups, full-reef access, all-inclusive.',
-  '/expeditions/ocean-safari': 'Ocean Safari: 6-day northern Ningaloo Reef live-aboard. Maximum 12 guests. Whale shark encounters, guided snorkeling, all-inclusive meals and gear. From $2,495 AUD. Departing Exmouth, WA. Book 2026.',
-  '/expeditions/dive-expedition': 'Dive Expedition: 9-day live-aboard covering the full length of Ningaloo Reef. Remote dive sites, whale shark swims, humpback whale encounters. From $4,495 AUD. Maximum 14 guests. 2026 departures open.',
-  '/about': 'Expedition OZ runs small-group live-aboard expeditions through Ningaloo Marine Park, Western Australia. Learn about our vessels, crew, and approach to reef-safe operations since 2018.',
+  '/': 'Sailing expeditions through Ningaloo Reef, Western Australia. Ocean Safari Expedition (5 nights, from $5,000 AUD), Dive Expedition (8 nights, from $9,600 AUD) and Ocean Safari Escape (3 nights, from $3,000 AUD). 2027 season open.',
+  '/expeditions': 'Three Ningaloo expeditions — the signature Ocean Safari Expedition (5 nights), the flagship Dive Expedition (8 nights), and the shorter Ocean Safari Escape (3 nights). All depart Exmouth, Western Australia, small groups, all-inclusive.',
+  '/expeditions/ocean-safari': 'Ocean Safari Expedition: our signature 5-night Ningaloo sailing expedition aboard Sylfia. Maximum 12 guests. Whale watching, snorkelling, all-inclusive meals and gear. From $5,000 AUD. Departing Exmouth, WA. Book 2027.',
+  '/expeditions/dive-expedition': 'Dive Expedition: our flagship 8-night liveaboard aboard Millennium covering the remote reaches of Ningaloo Reef. Scuba diving, seasonal whale shark and humpback encounters. From $9,600 AUD. Maximum 14 guests. 2027 departures open.',
+  '/expeditions/ocean-safari-escape': 'Ocean Safari Escape: a 3-night Ningaloo sailing escape aboard Sylfia. Maximum 12 guests. Remote reefs, wildlife, beach visits and sunset anchorages. From $3,000 AUD. Departing Exmouth, WA. Book 2027.',
+  '/about': 'Expedition OZ runs small-group sailing expeditions through Ningaloo Marine Park, Western Australia. Learn about our vessels, crew, and approach to reef-safe operations since 2018.',
   '/contact': 'Get in touch with Expedition OZ. Phone, email, or WhatsApp. Based in Exmouth, Western Australia. We respond within 24 hours on business days.',
-  '/faq': 'Questions about Ningaloo Reef live-aboards answered: what to pack, how to handle seasickness, dive certifications required, payment and cancellation terms, and best departure windows.',
+  '/faq': 'Questions about Ningaloo Reef sailing expeditions answered: what to pack, how to handle seasickness, dive certifications required, payment and cancellation terms, and best departure windows.',
   '/blog': 'Field notes, species guides, and stories from Ningaloo Reef. Whale shark encounters, reef conditions, crew perspectives, and what to expect on an Expedition OZ voyage.',
+  '/limited-expeditions': 'Handpicked small-group departures built around passion, purpose and extraordinary ocean experiences at Ningaloo. Private and hosted expeditions released throughout the season.',
 }
 
 export function buildOrganizationSchema() {

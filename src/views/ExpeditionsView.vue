@@ -12,7 +12,7 @@ const router = useRouter()
 
 useSEO({
   title: 'Our Expeditions – Luxury Live-Aboard Adventures',
-  description: 'Explore our luxury live-aboard expeditions at Ningaloo Reef. The Ocean Safari 6-day and Dive Expedition 9-day experiences offer intimate whale shark encounters, world-class dining, and premium accommodations.',
+  description: 'Explore our Ningaloo Reef expeditions: the Ocean Safari Expedition (5 nights), the flagship Dive Expedition (8 nights), and the shorter Ocean Safari Escape (3 nights).',
   path: '/expeditions',
   type: 'website',
   jsonLd: {
@@ -24,13 +24,13 @@ useSEO({
         "position": 1,
         "item": {
           "@type": "Product",
-          "name": "Ocean Safari 6-Day Northern Reef Expedition",
-          "description": "Intimate 6-day luxury live-aboard in the northern Ningaloo Reef",
+          "name": "Ocean Safari Expedition — 5 Night Ningaloo Sailing Expedition",
+          "description": "Our signature 5-night Ningaloo sailing expedition aboard Sylfia",
           "url": "https://expeditionoz.netlify.app/expeditions/ocean-safari",
           "image": "https://expeditionoz.netlify.app/images/ocean-safari-hero.jpg",
           "offers": {
             "@type": "Offer",
-            "price": "2495.00",
+            "price": "5000.00",
             "priceCurrency": "AUD"
           }
         }
@@ -40,13 +40,29 @@ useSEO({
         "position": 2,
         "item": {
           "@type": "Product",
-          "name": "Dive Expedition 9-Day Ultimate Expedition",
-          "description": "Flagship 9-day live-aboard expedition aboard the Dive Expedition",
+          "name": "Dive Expedition — 8 Night Liveaboard aboard Millennium",
+          "description": "Our flagship 8-night liveaboard dive expedition aboard Millennium",
           "url": "https://expeditionoz.netlify.app/expeditions/dive-expedition",
           "image": "https://expeditionoz.netlify.app/images/dive-expedition-hero.jpg",
           "offers": {
             "@type": "Offer",
-            "price": "3995.00",
+            "price": "9600.00",
+            "priceCurrency": "AUD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Product",
+          "name": "Ocean Safari Escape — 3 Night Ningaloo Sailing Escape",
+          "description": "A short, immersive 3-night Ningaloo sailing escape aboard Sylfia",
+          "url": "https://expeditionoz.netlify.app/expeditions/ocean-safari-escape",
+          "image": "https://expeditionoz.netlify.app/images/ocean-safari-escape-hero.jpg",
+          "offers": {
+            "@type": "Offer",
+            "price": "3000.00",
             "priceCurrency": "AUD"
           }
         }
@@ -62,6 +78,26 @@ const expeditions = computed(() => {
 
   return [
     {
+      id: 'ocean-safari',
+      title: 'OCEAN SAFARI EXPEDITION',
+      subtitle: 'Signature Expedition',
+      duration: '6 DAYS',
+      nights: '5 NIGHTS',
+      location: 'NINGALOO REEF',
+      guests: '12',
+      price: '$5,000',
+      image: cards[0]?.imageUrl || '',
+      hasImage: !!cards[0]?.imageUrl,
+      features: [
+        'Whale Watching',
+        'Snorkelling & Marine Life',
+        'Sailing & Exploration',
+        'Yoga & Breathwork',
+        'Onboard Chef Crafted Dining'
+      ],
+      link: '/expeditions/ocean-safari'
+    },
+    {
       id: 'dive-expedition',
       title: 'DIVE EXPEDITION',
       subtitle: 'Flagship Expedition',
@@ -69,7 +105,7 @@ const expeditions = computed(() => {
       nights: '8 NIGHTS',
       location: 'NINGALOO REEF',
       guests: '14',
-      price: '$3,995',
+      price: '$9,600',
       image: cards[1]?.imageUrl || '',
       hasImage: !!cards[1]?.imageUrl,
       features: [
@@ -82,26 +118,25 @@ const expeditions = computed(() => {
       link: '/expeditions/dive-expedition'
     },
     {
-      id: 'ocean-safari',
-      title: 'OCEAN SAFARI',
-      subtitle: 'Reef Explorer',
-      duration: '6 DAYS',
-      nights: '5 NIGHTS',
+      id: 'ocean-safari-escape',
+      title: 'OCEAN SAFARI ESCAPE',
+      subtitle: 'Shorter Escape',
+      duration: '4 DAYS',
+      nights: '3 NIGHTS',
       location: 'NINGALOO REEF',
       guests: '12',
-      price: '$2,495',
-      image: cards[0]?.imageUrl || '',
-      hasImage: !!cards[0]?.imageUrl,
+      price: '$3,000',
+      image: cards[2]?.imageUrl || '',
+      hasImage: !!cards[2]?.imageUrl,
       features: [
-        'Whale Watching',
-        'Snorkelling & Marine Life',
-        'Sailing & Exploration',
-        'Yoga & Breathwork',
+        'Remote Reefs & Beach Visits',
+        'Snorkelling & Wildlife Encounters',
+        'Sunset Anchorages',
+        'Perfect for Couples & Families',
         'Onboard Chef Crafted Dining'
       ],
-      link: '/expeditions/ocean-safari'
+      link: '/expeditions/ocean-safari-escape'
     },
-    
   ]
 })
 
@@ -134,11 +169,12 @@ onUnmounted(() => {
 <template>
   <div>
     <PageHero
+      component-name="ExpeditionsView"
       title="Our Expeditions"
       subtitle="Discover"
-      description="Choose your Ningaloo Reef adventure — from intimate 6-day escapes to the ultimate 9-day expedition"
-      image=""
-      image-alt="Ningaloo Reef at sunset"
+      description="Choose your Ningaloo Reef adventure — from a 3-night escape to our flagship 8-night dive expedition"
+      fallback-image=""
+      fallback-alt="Ningaloo Reef at sunset"
       height="60vh"
     >
       <template #default>
@@ -269,7 +305,7 @@ onUnmounted(() => {
 
         <div class="section-footer reveal">
           <p class="footer-text">
-            Both expeditions depart from Exmouth, Western Australia — the gateway to Ningaloo Reef. All expeditions are fully inclusive: meals, beverages, snorkel gear, and marine naturalist guides.
+            All expeditions depart from Exmouth, Western Australia — the gateway to Ningaloo Reef. All expeditions are fully inclusive: meals, beverages, snorkel gear, and marine naturalist guides.
           </p>
           <button
             class="btn-gold btn-large"
@@ -301,7 +337,7 @@ onUnmounted(() => {
 
 .expedition-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   width: 100%;
 }
@@ -375,12 +411,12 @@ onUnmounted(() => {
   font-weight: 600;
   margin-bottom: 0.5rem;
   font-style: italic;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-display);
 }
 
 .card-title {
   color: #f8f5ef;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 3vw, 3.2rem);
   line-height: 1;
   font-weight: 300;
@@ -447,7 +483,7 @@ onUnmounted(() => {
 
 .stat-value {
   color: #c9a84c;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1;
@@ -540,6 +576,12 @@ onUnmounted(() => {
   line-height: 1.6;
   max-width: 640px;
   margin: 0 auto 2rem;
+}
+
+@media (max-width: 1280px) {
+  .expedition-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 1024px) {

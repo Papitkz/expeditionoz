@@ -30,25 +30,36 @@ const heroMedia = computed(() => {
 // About section
 const aboutItem = computed(() => cms.getSlot('about', 0))
 
-// Vessel gallery
+// Vessel gallery — fixed 6 slots; use getSlot() per index so order never drifts
+// even when only some slots have been uploaded. Matches AdminImages COMPONENT_REGISTRY:
+// OceanSafariView / vesselGallery slots 0-5.
+const VESSEL_GALLERY_SLOTS = 6
 const vesselImages = computed(() =>
-  cms.getSection('vesselGallery').map((item) => ({
-    src: item.imageUrl || '',
-    caption: item.caption || item.title || '',
-    category: item.category || '',
-    hasImage: !!item.imageUrl,
-  }))
+  Array.from({ length: VESSEL_GALLERY_SLOTS }, (_, i) => {
+    const item = cms.getSlot('vesselGallery', i)
+    return {
+      src: item?.imageUrl || '',
+      caption: item?.caption || item?.title || '',
+      category: item?.category || '',
+      hasImage: !!item?.imageUrl,
+    }
+  }).filter((img) => img.hasImage) // only show slots that have been uploaded
 )
 
-// Dining gallery
+// Dining gallery — fixed 4 slots; same pattern as vesselGallery above.
+// Matches AdminImages COMPONENT_REGISTRY: OceanSafariView / diningGallery slots 0-3.
+const DINING_GALLERY_SLOTS = 4
 const diningImages = computed(() =>
-  cms.getSection('diningGallery').map((item, i) => ({
-    src: item.imageUrl || '',
-    title: item.title || '',
-    desc: item.description || '',
-    hasImage: !!item.imageUrl,
-    featured: i === 0,
-  }))
+  Array.from({ length: DINING_GALLERY_SLOTS }, (_, i) => {
+    const item = cms.getSlot('diningGallery', i)
+    return {
+      src: item?.imageUrl || '',
+      title: item?.title || '',
+      desc: item?.description || '',
+      hasImage: !!item?.imageUrl,
+      featured: i === 0,
+    }
+  }).filter((img) => img.hasImage)
 )
 
 // Fallback itinerary data
@@ -98,27 +109,24 @@ const fallbackItinerary: ItineraryItem[] = [
   },
 ]
 
-// Itinerary — CMS or fallback
-const itinerary = computed(() => {
-  const cmsData = cms.getSection('itinerary')
-  // Ensure CMS data has the ItineraryItem shape; fallback if empty
-  const source: ItineraryItem[] = cmsData.length > 0 
-    ? cmsData.map((item: any) => ({
-        day: item.day || '',
-        title: item.title || '',
-        description: item.description || '',
-        imageUrl: item.imageUrl || '',
-      }))
-    : fallbackItinerary
-  return source.map((item, i) => ({
-    day: item.day || `Day ${i + 1}`,
-    title: item.title || `Day ${i + 1}`,
-    desc: item.description || '',
-    image: item.imageUrl || '',
-    thumb: item.imageUrl || '',
-    hasImage: !!item.imageUrl,
-  }))
-})
+// Itinerary — fixed 6 slots; use getSlot() per index so day images never drift.
+// Falls back to fallbackItinerary[i] text/image when a CMS slot has no content.
+// Matches AdminImages COMPONENT_REGISTRY: OceanSafariView / itinerary slots 0-5.
+const ITINERARY_SLOTS = 6
+const itinerary = computed(() =>
+  Array.from({ length: ITINERARY_SLOTS }, (_, i) => {
+    const cmsItem = cms.getSlot('itinerary', i)
+    const fb = fallbackItinerary[i]
+    return {
+      day: fb?.day || `Day ${i + 1}`,
+      title: cmsItem?.title || fb?.title || `Day ${i + 1}`,
+      desc: cmsItem?.description || fb?.description || '',
+      image: cmsItem?.imageUrl || fb?.imageUrl || '',
+      thumb: cmsItem?.imageUrl || fb?.imageUrl || '',
+      hasImage: !!(cmsItem?.imageUrl || fb?.imageUrl),
+    }
+  })
+)
 
 const openLightbox = (index: number) => {
   currentImage.value = index
@@ -150,15 +158,15 @@ onMounted(async () => {
 })
 
 useSEO({
-  title: 'Ocean Safari – 6-Day Northern Reef Live-Aboard',
-  description: 'Ocean Safari: 6-day northern Ningaloo Reef live-aboard for up to 12 guests. Whale shark encounters, guided snorkeling, all-inclusive meals and gear. From $2,495 AUD. Departing Exmouth, WA.',
+  title: 'Ocean Safari Expedition – 6-Day Ningaloo Sailing Expedition',
+  description: 'Ocean Safari Expedition: our signature 5-night Ningaloo Reef sailing expedition aboard Sylfia for up to 12 guests. Whale watching, snorkelling and sailing exploration. From $5,000 AUD. Departing Exmouth, WA.',
   path: '/expeditions/ocean-safari',
   type: 'product',
   jsonLd: {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "Ocean Safari — 6-Day Ningaloo Reef Live-Aboard",
-    "description": "Small-group live-aboard expedition through the northern Ningaloo Reef. Maximum 12 guests, whale shark encounters, all-inclusive.",
+    "name": "Ocean Safari Expedition — 5-Night Ningaloo Sailing Expedition",
+    "description": "Our signature sailing expedition through Ningaloo Reef aboard Sylfia. Maximum 12 guests, whale watching, snorkelling, all-inclusive.",
     "image": "https://expeditionoz.netlify.app/images/ocean-safari-hero.jpg",
     "brand": {
       "@type": "Brand",
@@ -167,10 +175,10 @@ useSEO({
     "url": "https://expeditionoz.netlify.app/expeditions/ocean-safari",
     "offers": {
       "@type": "Offer",
-      "price": "2495.00",
+      "price": "5000.00",
       "priceCurrency": "AUD",
       "availability": "https://schema.org/InStock",
-      "priceValidUntil": "2026-12-31",
+      "priceValidUntil": "2027-10-15",
       "url": "https://expeditionoz.netlify.app/expeditions/ocean-safari",
       "shippingDetails": {
         "@type": "OfferShippingDetails",
@@ -242,12 +250,12 @@ useSEO({
       </div>
 
       <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
-        <p class="overline-text mb-3 md:mb-4 text-xs md:text-sm tracking-[0.3em] text-white/90">6 Day Live-Aboard Expedition</p>
+        <p class="overline-text mb-3 md:mb-4 text-xs md:text-sm tracking-[0.3em] text-white/90">5 Night Live-Aboard Expedition</p>
         <h1 class="font-display text-4xl md:text-7xl lg:text-8xl font-light text-white mb-3 md:mb-4" style="font-family: var(--font-display);">
-          Ocean Safari
+          Ocean Safari Expedition
         </h1>
         <p class="font-display text-xl md:text-4xl italic text-[#C9A84C] mb-4 md:mb-6" style="font-family: var(--font-display);">
-          Northern Reef Expedition
+          Our Signature Ningaloo Sailing Expedition
         </p>
         <p class="max-w-2xl text-sm md:text-lg text-white/90 mb-6 md:mb-8 font-light leading-relaxed px-2">
           Six extraordinary days exploring the untouched northern reaches of Ningaloo Reef aboard our elegant vessel.
@@ -332,10 +340,10 @@ useSEO({
           <p class="overline-text mb-2 md:mb-4 text-xs md:text-sm">Your Home at Sea</p>
           <div class="gold-divider mb-3 md:mb-6 mx-auto"></div>
           <h2 class="font-display text-2xl md:text-4xl lg:text-5xl font-light" style="font-family: var(--font-display); color: var(--color-sand-100);">
-            The Vessel <span class="italic" style="color: var(--color-gold-400);">Ocean Safari</span>
+            The Vessel <span class="italic" style="color: var(--color-gold-400);">Sylfia</span>
           </h2>
           <p class="mt-3 md:mt-4 max-w-2xl mx-auto text-sm md:text-base opacity-70 px-2" style="color: var(--color-sand-200);">
-            Originally built as a private luxury yacht, Ocean Safari has been thoughtfully refitted for expedition cruising without sacrificing an ounce of elegance.
+            Originally built as a private luxury yacht, Sylfia has been thoughtfully refitted for expedition sailing without sacrificing an ounce of elegance.
           </p>
         </div>
 

@@ -242,10 +242,11 @@ export function useCMS() {
       const q = query(
         collection(db, 'cms_trips'),
         where('isPublished', '==', true),
-        orderBy('sortOrder')
       )
       const snap = await getDocs(q)
-      return snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+      return snap.docs
+        .map((d) => ({ id: d.id, ...d.data() } as any))
+        .sort((a, b) => a.sortOrder - b.sortOrder)
     } catch (e) {
       console.warn('Firebase unavailable, returning empty trips:', e)
       return []
@@ -275,10 +276,12 @@ export function useCMS() {
       const q = query(
         collection(db, 'cms_trip_features'),
         where('tripId', '==', tripId),
-        orderBy('sortOrder')
       )
       const snap = await getDocs(q)
-      return snap.docs.map((d) => d.data().featureText)
+      return snap.docs
+        .map((d) => d.data() as any)
+        .sort((a, b) => a.sortOrder - b.sortOrder)
+        .map((d) => d.featureText)
     } catch (e) {
       console.warn('Firebase unavailable, cannot load features:', e)
       return []
@@ -291,10 +294,11 @@ export function useCMS() {
       const q = query(
         collection(db, 'cms_trip_itinerary'),
         where('tripId', '==', tripId),
-        orderBy('dayNumber')
       )
       const snap = await getDocs(q)
-      return snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+      return snap.docs
+        .map((d) => ({ id: d.id, ...d.data() } as any))
+        .sort((a, b) => a.dayNumber - b.dayNumber)
     } catch (e) {
       console.warn('Firebase unavailable, cannot load itinerary:', e)
       return []
@@ -307,23 +311,22 @@ export function useCMS() {
       const q = query(
         collection(db, 'cms_blogs'),
         where('isPublished', '==', true),
-        orderBy('publishedAt', 'desc')
       )
       const snap = await getDocs(q)
 
-      console.log('Total docs:', snap.size)
-      console.log('Empty?', snap.empty)
-
-      const blogs = snap.docs.map((d) => {
-        const data = d.data()
-        console.log('Doc ID:', d.id)
-        console.log('Doc data keys:', Object.keys(data))
-        console.log('Raw data:', data)
-        return {
-          id: d.id,
-          ...data
-        }
-      })
+      const blogs = snap.docs
+        .map((d) => {
+          const data = d.data()
+          return {
+            id: d.id,
+            ...data
+          } as any
+        })
+        .sort((a, b) => {
+          const aTime = a.publishedAt?.toMillis ? a.publishedAt.toMillis() : new Date(a.publishedAt || 0).getTime()
+          const bTime = b.publishedAt?.toMillis ? b.publishedAt.toMillis() : new Date(b.publishedAt || 0).getTime()
+          return bTime - aTime
+        })
 
       return blogs
     } catch (e) {

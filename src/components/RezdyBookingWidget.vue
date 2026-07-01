@@ -285,7 +285,7 @@ function startOver() {
   border-radius: 6px;
   padding: 2rem;
   color: #f8f5ef;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-body);
 }
 
 .mock-banner {
@@ -310,7 +310,7 @@ function startOver() {
 }
 
 .panel-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-display);
   font-weight: 300;
   font-size: 1.6rem;
   color: #f8f5ef;
@@ -525,7 +525,7 @@ function startOver() {
 }
 
 .summary-price {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   color: #c9a84c;
 }

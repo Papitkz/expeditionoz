@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useCallScheduler, type CallBooking, type WeekSchedule } from '@/composables/useCallScheduler'
+import { useCalendlyBookings } from '@/composables/useCalendlyBookings'
 
 const {
   getSchedule, saveSchedule, getAllBookings, updateBookingStatus,
   formatTime, formatDate, DEFAULT_SCHEDULE, buildDefaultSlots,
 } = useCallScheduler()
+
+const {
+  bookings: calendlyBookings,
+  loading: calendlyLoading,
+  error: calendlyError,
+  loadCalendlyBookings,
+} = useCalendlyBookings()
 
 // ── Schedule ─────────────────────────────────────────────────────────────────
 const schedule = ref<WeekSchedule>({ ...DEFAULT_SCHEDULE })
@@ -92,10 +100,10 @@ async function changeStatus(id: string, status: CallBooking['status']) {
 }
 
 // ── Tab ───────────────────────────────────────────────────────────────────────
-const activeTab = ref<'bookings' | 'schedule'>('bookings')
+const activeTab = ref<'bookings' | 'schedule' | 'calendly'>('bookings')
 
 onMounted(async () => {
-  await Promise.all([loadSchedule(), loadBookings()])
+  await Promise.all([loadSchedule(), loadBookings(), loadCalendlyBookings()])
 })
 
 function statusColor(status: string) {
@@ -106,6 +114,19 @@ function statusColor(status: string) {
 
 // All possible 20-min slots for display
 const allSlots = buildDefaultSlots()
+
+// ── Calendly formatting helpers ─────────────────────────────────────────────
+function formatCalendlyTime(iso: string): string {
+  if (!iso) return '—'
+  try {
+    return new Date(iso).toLocaleString(undefined, {
+      weekday: 'short', month: 'short', day: 'numeric',
+      hour: 'numeric', minute: '2-digit',
+    })
+  } catch {
+    return iso
+  }
+}
 </script>
 
 <template>
@@ -119,6 +140,10 @@ const allSlots = buildDefaultSlots()
         </button>
         <button class="tab-btn" :class="{ active: activeTab === 'schedule' }" @click="activeTab = 'schedule'">
           Availability
+        </button>
+        <button class="tab-btn" :class="{ active: activeTab === 'calendly' }" @click="activeTab = 'calendly'">
+          Calendly
+          <span v-if="calendlyBookings.length" class="tab-badge">{{ calendlyBookings.length }}</span>
         </button>
       </div>
     </div>
@@ -243,6 +268,68 @@ const allSlots = buildDefaultSlots()
         </div>
       </div>
     </div>
+
+    <!-- ── CALENDLY TAB ──────────────────────────────────────────────────────── -->
+    <div v-if="activeTab === 'calendly'" class="tab-content">
+      <div class="bookings-toolbar">
+        <p class="calendly-subtitle">Synced automatically from Calendly via webhook.</p>
+        <button class="refresh-btn" @click="loadCalendlyBookings">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+          </svg>
+          Refresh
+        </button>
+      </div>
+
+      <div v-if="calendlyLoading" class="loading-state">Loading Calendly bookings…</div>
+
+      <div v-else-if="!calendlyBookings.length" class="empty-state">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <p v-if="calendlyError">
+          No Calendly bookings found yet. If you've just set up the integration, make sure
+          the <code>calendly-webhook</code> Edge Function is deployed and the webhook
+          subscription is pointed at it — see the setup notes at the top of
+          <code>supabase/functions/calendly-webhook/index.ts</code>.
+        </p>
+        <p v-else>No Calendly bookings yet. They'll appear here as soon as someone books a call.</p>
+      </div>
+
+      <div v-else class="bookings-list">
+        <div v-for="b in calendlyBookings" :key="b.id" class="booking-card">
+          <div class="booking-top">
+            <div>
+              <p class="booking-name">{{ b.inviteeName || 'Unnamed invitee' }}</p>
+              <p class="booking-contact">
+                <span>{{ b.inviteeEmail }}</span>
+                <span v-if="b.timezone" class="dot">·</span>
+                <span v-if="b.timezone">{{ b.timezone }}</span>
+              </p>
+            </div>
+            <span class="status-badge" :class="b.status === 'canceled' ? 'status-cancelled' : 'status-confirmed'">
+              {{ b.status === 'canceled' ? 'Cancelled' : 'Confirmed' }}
+            </span>
+          </div>
+
+          <div class="booking-meta">
+            <span v-if="b.eventName" class="meta-chip">{{ b.eventName }}</span>
+            <span v-if="b.startTime" class="meta-chip">{{ formatCalendlyTime(b.startTime) }}</span>
+            <span v-if="b.location" class="meta-chip">{{ b.location }}</span>
+          </div>
+
+          <p v-if="b.cancellationReason" class="booking-message">Cancelled: {{ b.cancellationReason }}</p>
+
+          <div v-if="b.questionsAndAnswers?.length" class="booking-message">
+            <div v-for="(qa, i) in b.questionsAndAnswers" :key="i">
+              <strong>{{ qa.question }}:</strong> {{ qa.answer }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -267,6 +354,8 @@ const allSlots = buildDefaultSlots()
 .filter-chip.active { background: rgba(201,168,76,.15); border-color: var(--color-gold-400, #c9a84c); color: var(--color-gold-400, #c9a84c); }
 .refresh-btn { display: flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.8rem; border: 1px solid rgba(255,255,255,.1); border-radius: 0.4rem; background: transparent; color: rgba(255,255,255,.45); font-size: 0.73rem; cursor: pointer; transition: background .2s, color .2s; }
 .refresh-btn:hover { background: rgba(255,255,255,.07); color: rgba(255,255,255,.7); }
+
+.calendly-subtitle { font-size: 0.78rem; color: rgba(255,255,255,.4); margin: 0; }
 
 .loading-state, .empty-state { text-align: center; padding: 3rem 1rem; color: rgba(255,255,255,.3); font-size: 0.85rem; }
 .empty-state svg { display: block; margin: 0 auto 0.75rem; }

@@ -20,9 +20,9 @@ const CLOUD_NAME = 'dklhygcg1'
 const UPLOAD_PRESET = 'Expedition Drenched'
 
 // Cloudinary free plan hard limit is 10MB — we target 9MB to stay safely under
-const MAX_FILE_SIZE = 9 * 1024 * 1024   // 9MB (safe limit for Cloudinary free)
+const MAX_FILE_SIZE = 150 * 1024 * 1024   // 9MB (safe limit for Cloudinary free)
 const MAX_IMAGE_SIZE = 9 * 1024 * 1024  // 9MB
-const MAX_VIDEO_SIZE = 100 * 1024 * 1024 // 100MB
+const MAX_VIDEO_SIZE = 200 * 1024 * 1024 // 100MB
 
 export function useStorageUpload() {
   const uploading = ref(false)

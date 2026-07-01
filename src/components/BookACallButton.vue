@@ -104,7 +104,7 @@ onUnmounted(() => {
   border: none;
   border-radius: 0 !important;
   cursor: pointer;
-  font-family: 'Montserrat', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -176,5 +176,21 @@ onUnmounted(() => {
 @media (prefers-reduced-motion: reduce) {
   .bac-pulse { animation: none; }
   .bac-rise-enter-active { transition: none; }
+}
+
+@media (max-width: 767px) {
+  .bac-btn {
+    padding: 0.75rem;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    border-radius: 50% !important;
+  }
+  .bac-icon svg {
+    margin: 0 !important;
+  }
+  .bac-label {
+    display: none;
+  }
 }
 </style>
