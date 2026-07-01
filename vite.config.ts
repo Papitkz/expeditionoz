@@ -16,6 +16,10 @@ export default defineConfig({
   ssr: {
     noExternal: ['vuetify'],
   },
+  server:{
+    host:'10.169.130.43',
+    port:2025
+  },
   build: {
     target: 'es2020',
     cssCodeSplit: true,
